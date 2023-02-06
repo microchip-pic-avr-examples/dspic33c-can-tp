@@ -89,7 +89,7 @@ After Programming both boards, ensure both are powered and attached to the CAN b
 
 ![Packets over CAN bus](images/can_tp_demo_packets.jpg)
 
-# Custom Board/Device Setup Instructions
+# Porting the CAN-TP demo to use a Custom Board/Device
 You can use any dsPIC device that support CAN/CAN-FD and has an LED and at least one button to trigger the start of the loop. Setup requires the schematics for the boards being used. Each board has different I/O Pin Mapping to the mikroBUS and will need to be configured correctly to work. This goes for the LED and Button pins selected as well. The setup below describes the setup for the two boards as well as the CAN/CAN-FD configurations to use.
 
 ## Setup for Board 1:
@@ -129,7 +129,7 @@ You can use any dsPIC device that support CAN/CAN-FD and has an LED and at least
 
 ## Setup for Board 2:
 
-   This project is meant to kick of the message setting. It requires a button and an led. This will utilize the dspic33ck-curiosity-can-tp to recieve, process and respond to devices with an ID of 0xA2.
+   This project is meant to kick of the message setting. It requires an led. This will utilize the dspic33ck-curiosity-can-tp to recieve, process and respond to devices with an ID of 0xA1.
 
     With the dspic33ck-curiosity-can-tp.X project open in the MPLAB® X IDE. 
 
@@ -143,7 +143,6 @@ You can use any dsPIC device that support CAN/CAN-FD and has an LED and at least
     2. PIN CONFIGURATIONS:
     Select an LED output and CAN Tx and Rx pins in the PIN Grid View for your board. (View PIN mapping and choose them accordingly) This test utilizes the MCP2542 Click board for CAN communication. The mapping to the mikroBUS will vary.
 
-    *If you are using the example board skip to the Example Setup Below.
     * Select an LED as output
     * Select the CAN1TX for your board
     * Select the CAN1RX for your board
@@ -158,10 +157,9 @@ You can use any dsPIC device that support CAN/CAN-FD and has an LED and at least
     Select the Generate Button under project resources.
 
     Ensure not to overwrite the contents of the main.c.
-    
-    5. For this board comment out line 28 to be (//#define STARTING_BOARD)
 
     Build and Program the board.
+    
 # CAN-TP Project - Drivers
 
 The CAN-TP project uses the following:
