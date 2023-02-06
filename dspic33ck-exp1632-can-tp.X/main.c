@@ -1,5 +1,5 @@
 /*
-? [2023] Microchip Technology Inc. and its subsidiaries.
+© [2023] Microchip Technology Inc. and its subsidiaries.
 
     Subject to your compliance with these terms, you may use Microchip 
     software and any derivatives exclusively with Microchip products. 
@@ -26,8 +26,6 @@
 #include "mcc_generated_files/can/can_tp_config.h"
 #include "mcc_generated_files/timer/tmr1.h"
 
-#define STARTING_BOARD
-
 #if defined(CAN_TP_PAUSE_ON_FIRST_FRAME) && CAN_TP_PAUSE_ON_FIRST_FRAME == true
 //This line can be removed manually once a call to CAN_TP_Resume() has been made allowing the passing of packets to continue.
 #error "If pause on first frame is enabled the device will not send packets after First Frame until CAN_TP_RxResume() has been called."
@@ -37,16 +35,8 @@
 #define LONG_DELAY 4000000
 uint8_t rxBuffer[512];
 
-#ifdef STARTING_BOARD
 //Allows the device to show a Single Frame being sent
 uint8_t txBuffer[3] = {3, 0, 0};
-#else
-/**
- * Defined to allow the other device to send a message larger than the CAN
- * packet to show the use of the different frame types defined for CAN-TP.
- */
-uint8_t txBuffer[16] = {3, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15};
-#endif
 
 uint8_t currentState = 3;
 uint8_t tickStates[5] = {10, 300, 700, 1200, 2000};
@@ -56,6 +46,7 @@ bool startedSendingLoop = false;
 uint8_t tickCount = 1000;
 uint8_t ticksMax = 1000;
 
+//Sets the state that will lengthen or shorten the time between led toggles.
 void SetTicks(int newTicksCount)
 {    
     ticksMax = tickStates[newTicksCount];
@@ -127,9 +118,7 @@ int main(void)
     //This module requires a 1ms timer too but this demo shows how you can utilize a single timer 
     Timer1.TimeoutCallbackRegister(&CUSTOM_TICKS);
     
-    #ifdef STARTING_BOARD
     BUTTON_SetInterruptHandler(&BUTTON_Pressed);
-    #endif
     
     while(1)
     {         
