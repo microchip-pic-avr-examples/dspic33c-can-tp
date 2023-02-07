@@ -5,7 +5,7 @@
 
 This example shows how to configure the CAN-TP module in MCC Melody for different devices to interact over a CAN bus. This also shows how CAN-TP handles the messages over the CAN bus.
 
-The Given demos are set up to utilize specific boards defined in the required hardware section below. These demos utilize resources most boards have available (Leds, Buttons, and mikroBUS slot). This allows the project to be portable to other hardware.
+The given demos are set up to utilize specific boards defined in the required hardware section below. These demos utilize resources most boards have available (Leds, Buttons, and mikroBUS slot). This allows the project to be portable to other hardware.
 
 ## Related Documentation
 
@@ -83,7 +83,7 @@ Optional: Connect a CAN analyzer of your choosing to the CAN bus to view the CAN
 
 # Operation
 
-After Programming both boards, ensure both are powered and attached to the CAN bus using the click boards. Next press the S1 button on Explorer 16/32. This will start the back and forth Message passing between the two devices. This will continue until stopped manually by removing power from one of the devices.
+After programming both boards, ensure both are powered and attached to the CAN bus using the click boards. Next press the S1 button on Explorer 16/32. This will start the back and forth Message passing between the two devices. This will continue until stopped manually by removing power from one of the devices.
 
 *Figure 2 - Recording over the CAN bus*
 
@@ -94,7 +94,7 @@ You can use any dsPIC device that support CAN/CAN-FD and has an LED and at least
 
 ## Setup for Board 1:
 
-    This project is meant to kick of the message setting. It requires a button and an led. This will utilize the dspic33ck-exp1632-can-tp to recieve, process and respond to devices with an ID of 0xA2.
+    The project for board 1 is meant to kick off the message sending. It requires a button and an led. This will utilize the dspic33ck-exp1632-can-tp to receive, process and respond to devices with an ID of 0xA2.
 
     With the dspic33ck-exp1632-can-tp.X project open in the MPLAB® X IDE. 
 
@@ -114,8 +114,8 @@ You can use any dsPIC device that support CAN/CAN-FD and has an LED and at least
         - Select the CAN1RX for your board
 
     3. Then select Pins under the Project Resources:
-        - For the button input enable Weak pullup, interrupt on negative change, and change the custom name to be BUTTON.
-        - For the led output change the custom name to be LED.
+        - For the button input enable Weak pullup, interrupt on negative change, and change the custom name to be BUTTON
+        - For the led output change the custom name to be LED
 
      4. Select CAN_FD1 and do the following:
         - Enable Data Bit Rate and Set Bit Rate to 2Mbps
@@ -129,7 +129,7 @@ You can use any dsPIC device that support CAN/CAN-FD and has an LED and at least
 
 ## Setup for Board 2:
 
-   This project is meant to kick of the message setting. It requires an led. This will utilize the dspic33ck-curiosity-can-tp to recieve, process and respond to devices with an ID of 0xA1.
+   The project for board 2 is meant to wait until it receives a message before responding. It requires an led. This will utilize the dspic33ck-curiosity-can-tp to receive, process and respond to devices with an ID of 0xA1.
 
     With the dspic33ck-curiosity-can-tp.X project open in the MPLAB® X IDE. 
 
@@ -143,16 +143,16 @@ You can use any dsPIC device that support CAN/CAN-FD and has an LED and at least
     2. PIN CONFIGURATIONS:
     Select an LED output and CAN Tx and Rx pins in the PIN Grid View for your board. (View PIN mapping and choose them accordingly) This test utilizes the MCP2542 Click board for CAN communication. The mapping to the mikroBUS will vary.
 
-    * Select an LED as output
-    * Select the CAN1TX for your board
-    * Select the CAN1RX for your board
+        - Select an LED as output
+        - Select the CAN1TX for your board
+        - Select the CAN1RX for your board
 
-    3. Then select Pins under the Project Resources.
-    * For the led output change the custom name to be LED.
+    3. Then select Pins under the Project Resources
+        - For the led output change the custom name to be LED
 
-    4. Select CAN_FD1 and do the following
-    * Enable Data Bit Rate and Set Bit Rate to 2Mbps
-    * In filter0's Message ID Set it to 0xA1
+    4. Select CAN_FD1 and do the following:
+        - Enable Data Bit Rate and Set Bit Rate to 2Mbps
+        - In filter0's Message ID Set it to 0xA1
 
     Select the Generate Button under project resources.
 
