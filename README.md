@@ -1,11 +1,11 @@
 <!-- Please do not change this logo with link -->
 [![MCHP](images/microchip.png)](https://www.microchip.com)
 
-# CAN-TP demo
+# dsPIC33C CAN-TP Demo
 
-This example shows how to configure the CAN-TP module in MCC Melody for different devices to interact over a CAN bus. This also shows how CAN-TP handles the messages over the CAN bus.
+The dsPIC33C CAN-TP Demo shows how to configure the CAN-TP module in MCC Melody for different devices to interact over a CAN bus. The demo also shows how CAN-TP handles messages over the CAN bus.
 
-The given demos are set up to utilize specific boards defined in the required hardware section below. These demos utilize resources most boards have available (Leds, Buttons, and mikroBUS slot). This allows the project to be portable to other hardware.
+The MPLAB® X demo projects are set up to utilize specific boards defined in the required hardware section below. The dsPIC33C CAN-TP Demo utilizes resources that are available on most boards(LEDs, Buttons, and mikroBUS slot) allowing the project to be portable to other hardware.
 
 ## Related Documentation
 
@@ -41,9 +41,9 @@ The given demos are set up to utilize specific boards defined in the required ha
 
 # Hardware Setup
 
-The Hardware for this demo requires a CAN bus. This demo was created for a dsPIC device that supports CAN/CAN-FD communication in Melody. Below are examples of boards that can be used and their setup. If the demo being ran uses different boards with the MCP2542 Click Boards then refer to the boards/devices schematics and data sheets for information on the PIN selects. Check out (Commonly Used PIMS/Board PIN Selections) section below for more information.
+The dsPIC33C CAN-TP Demo were created for the Explorer 16/32 with a dsPIC33CK256MP508 PIM and a dsPIC33CK Curiosity Board for their support CAN/CAN-FD communication in Melody. If different boards or devices will be used with the MCP2542 Click Boards then refer to the **Porting the CAN-TP demo to use a Custom Board/Device** Section below.
 
-*Figure 1 - Setup of the CAN demo*
+*Figure 1 - Setup of the dsPIC33C CAN-TP Demo*
 
 ![CAN-TP Setup](images/can_tp_setup.jpg)
 
@@ -65,15 +65,15 @@ Optional: Connect a CAN analyzer of your choosing to the CAN bus to view the CAN
 
 
 ## Programming the Explorer 16/32 board with dsPIC33CK256MP508 PIM
-    1. Open the dspic33ck-exp1632-can-tp.x in .
-    2. Ensure the project is set as the main project in melody by selecting the "Projects" tab on the left side of MPLAB® X and right clicking the project and selecting "Set as Main Project".
+    1. Open the dspic33ck-exp1632-can-tp.X in .
+    2. Ensure the project is set as the main project in the IDE by selecting the "Projects" tab on the left side of MPLAB® X and right clicking the project and selecting "Set as Main Project".
     3. At this point plug in the PICKit 4 from the board to the PC or the PKOB (PICkit On-Board) to the PC.
     4. Now you are ready to program the device by selecting the "Make and Program Device (Project dspic33ck-exp1632-can-tp)" button on the top menu bar.
     5. This will build the project and program the device.
     
 
 ## Setup for project: dspic33ck-curiosity-can-tp
-    1. Open the dspic33ck-curiosity-can-tp.x in .
+    1. Open the dspic33ck-curiosity-can-tp.X in .
     2. Ensure the project is set as the main project in melody by selecting the "Projects" tab on the left side of MPLAB® X and right clicking the project and selecting "Set as Main Project".
     3. At this point plug the PKOB (PICkit On-Board) to the PC.
     4. Now you are ready to program the device by selecting the "Make and Program Device (Project dspic33ck-curiosity-can-tp)" button on the top menu bar.
@@ -90,7 +90,7 @@ After programming both boards, ensure both are powered and attached to the CAN b
 ![Packets over CAN bus](images/can_tp_demo_packets.jpg)
 
 # Porting the CAN-TP demo to use a Custom Board/Device
-You can use any dsPIC device that support CAN/CAN-FD and has an LED and at least one button to trigger the start of the loop. Setup requires the schematics for the boards being used. Each board has different I/O Pin Mapping to the mikroBUS and will need to be configured correctly to work. This goes for the LED and Button pins selected as well. The setup below describes the setup for the two boards as well as the CAN/CAN-FD configurations to use.
+You can use any dsPIC device that support CAN/CAN-FD and has an LED and at least one button to trigger the start of the loop. Setup requires the schematics for the boards being used. Each board has different I/O Pin Mapping to the mikroBUS and will need to be configured correctly to work. This goes for the LED and Button pins selected as well. The setup below describes the setup for the two boards as well as the CAN/CAN-FD configurations to use. Check out (Commonly Used PIMS/Board PIN Selections) section below for more information.
 
 ## Setup for Board 1:
 
