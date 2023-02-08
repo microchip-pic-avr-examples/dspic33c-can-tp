@@ -65,38 +65,41 @@ Optional: Connect a CAN analyzer of your choosing to the CAN bus to view the CAN
 
 
 ## Programming the Explorer 16/32 board with dsPIC33CK256MP508 PIM
-    1. Open the dspic33ck-exp1632-can-tp.X in .
-    2. Ensure the project is set as the main project in the IDE by selecting the "Projects" tab on the left side of MPLAB® X and right clicking the project and selecting "Set as Main Project".
-    3. At this point plug in the PICKit 4 from the board to the PC or the PKOB (PICkit On-Board) to the PC.
-    4. Now you are ready to program the device by selecting the "Make and Program Device (Project dspic33ck-exp1632-can-tp)" button on the top menu bar.
-    5. This will build the project and program the device.
+    1. Open the dspic33ck-explorer1632-can-tp.X in the MPLAB® X IDE.
+    2. Right click the project in "Projects" tab of MPLAB® X IDE and select "Set as Main Project".
+    3. Plug in the PICKit 4 from the board to the PC or the PKOB (PICkit On-Board) to the PC.
+    4. Program the device by selecting the "Make and Program Device (Project dspic33ck-exp1632-can-tp)" button on the menu bar.
+    5. The project should build and program successfully.
     
 
 ## Setup for project: dspic33ck-curiosity-can-tp
-    1. Open the dspic33ck-curiosity-can-tp.X in .
-    2. Ensure the project is set as the main project in melody by selecting the "Projects" tab on the left side of MPLAB® X and right clicking the project and selecting "Set as Main Project".
-    3. At this point plug the PKOB (PICkit On-Board) to the PC.
-    4. Now you are ready to program the device by selecting the "Make and Program Device (Project dspic33ck-curiosity-can-tp)" button on the top menu bar.
-    5. This will build the project and program the device.
-
-
+    1. Open the dspic33ck-curiosity-can-tp.X in the MPLAB® X IDE.
+    2. Right click the project in "Projects" tab of MPLAB® X IDE and select "Set as Main Project".
+    3. Plug the PKOB (PICkit On-Board) to the PC.
+    4. Program the device by selecting the "Make and Program Device (Project dspic33ck-curiosity-can-tp)" button on the menu bar.
+    5. The project should build and program successfully.
 
 # Operation
 
-After programming both boards, ensure both are powered and attached to the CAN bus using the click boards. Next press the S1 button on Explorer 16/32. This will start the back and forth Message passing between the two devices. This will continue until stopped manually by removing power from one of the devices.
+After programming both boards, ensure both are powered and attached to the CAN bus using the click boards. Press the S1 button on Explorer 16/32 board to start the transmission of the messages between the two devices. This will continue until manually stopped by powering off one of the devices.
 
 *Figure 2 - Recording over the CAN bus*
 
 ![Packets over CAN bus](images/can_tp_demo_packets.jpg)
 
-# Porting the CAN-TP demo to use a Custom Board/Device
-You can use any dsPIC device that support CAN/CAN-FD and has an LED and at least one button to trigger the start of the loop. Setup requires the schematics for the boards being used. Each board has different I/O Pin Mapping to the mikroBUS and will need to be configured correctly to work. This goes for the LED and Button pins selected as well. The setup below describes the setup for the two boards as well as the CAN/CAN-FD configurations to use. Check out (Commonly Used PIMS/Board PIN Selections) section below for more information.
+# Porting the CAN-TP demo to use a different Board/Device
+## Device Requirements:
+    You can use any dsPIC device that supports CAN/CAN-FD in MCC Melody. This includes PIMS(Plug-in Modules) or On-Board devices. 
+## Board Requirements:
+    The dsPIC33C CAN-TP Demo requires the boards to have an LED and at least one button to trigger the start of the loop. To configure the mikroBUS, LED and button pin selections correctly refer to the boards pin mapping in relation to the device being used. 
+    
+The setup below describes the setup for the two boards as well as the CAN/CAN-FD configurations to use. Check out (Commonly Used PIMS/Board PIN Selections) section below for more information.
 
 ## Setup for Board 1:
 
-    The project for board 1 is meant to kick off the message sending. It requires a button and an led. This will utilize the dspic33ck-exp1632-can-tp to receive, process and respond to devices with an ID of 0xA2.
+    The project for board 1 is meant to kick off the message passing. It requires a button and an LED. This will utilize the dspic33ck-exp1632-can-tp.X project to receive, process and respond to devices with an ID of 0xA2.
 
-    With the dspic33ck-exp1632-can-tp.X project open in the MPLAB® X IDE. 
+    Open dspic33ck-exp1632-can-tp.X project in the MPLAB® X IDE. 
 
     Right click the project folder and select Properties. Change the device to the one you are using and select an XC compiler. Apply these settings and continue with the next steps.
 
@@ -129,9 +132,9 @@ You can use any dsPIC device that support CAN/CAN-FD and has an LED and at least
 
 ## Setup for Board 2:
 
-   The project for board 2 is meant to wait until it receives a message before responding. It requires an led. This will utilize the dspic33ck-curiosity-can-tp to receive, process and respond to devices with an ID of 0xA1.
+    The project for board 2 is meant to wait until it receives a message before responding. It requires an led. This will utilize the dspic33ck-curiosity-can-tp to receive, process and respond to devices with an ID of 0xA1.
 
-    With the dspic33ck-curiosity-can-tp.X project open in the MPLAB® X IDE. 
+    Open dspic33ck-curiosity-can-tp.X project in the MPLAB® X IDE. 
 
     Right click the project folder and select Properties. Change the device to the one you are using and select an XC compiler. Apply these settings and continue with the next steps.
 
