@@ -104,7 +104,7 @@ The setup below describes the setup for the two boards as well as the CAN/CAN-FD
 
 ## Setup for Board 1:
 
-    The project for board 1 is meant to kick off the message passing. It requires a button and an LED. This will utilize the dspic33ck-exp1632-can-tp.X project to receive, process and respond to devices with an ID of 0xA2.
+    The project for board 1 kick off the message passing. It requires a button and an LED. This will utilize the dspic33ck-exp1632-can-tp.X project to receive, process and respond to devices with an ID of 0xA2.
 
     1. Open the dspic33ck-exp1632-can-tp.X project in the MPLAB® X IDE. 
 
@@ -143,7 +143,7 @@ The setup below describes the setup for the two boards as well as the CAN/CAN-FD
 
 ## Setup for Board 2:
 
-    The project for board 2 is meant to wait until it receives a message before responding. It requires an led. This will utilize the dspic33ck-curiosity-can-tp to receive, process and respond to devices with an ID of 0xA1.
+    The project for board 2 waits until it receives a message before responding. It requires an led. This will utilize the dspic33ck-curiosity-can-tp to receive, process and respond to devices with an ID of 0xA1.
 
     1. Open the dspic33ck-curiosity-can-tp.X project in the MPLAB® X IDE. 
 
