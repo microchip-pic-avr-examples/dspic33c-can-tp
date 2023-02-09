@@ -77,7 +77,7 @@
                    displayName="Important Files"
                    projectFiles="false">
       <itemPath>Makefile</itemPath>
-      <itemPath>dspic33ck-exp1632-can-tp.mc3</itemPath>
+      <itemPath>dspic33ck-explorer1632-can-tp.mc3</itemPath>
     </logicalFolder>
   </logicalFolder>
   <projectmakefile>Makefile</projectmakefile>

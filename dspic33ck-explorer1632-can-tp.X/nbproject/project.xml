@@ -3,7 +3,7 @@
     <type>com.microchip.mplab.nbide.embedded.makeproject</type>
     <configuration>
         <data xmlns="http://www.netbeans.org/ns/make-project/1">
-            <name>dspic33ck-exp1632-can-tp</name>
+            <name>dspic33ck-explorer1632-can-tp</name>
             <creation-uuid>fa4db3eb-00f7-4197-892b-49c947dd1993</creation-uuid>
             <make-project-type>0</make-project-type>
             <sourceEncoding>ISO-8859-1</sourceEncoding>
