@@ -3,7 +3,7 @@
 
 # dsPIC33C CAN-TP Demo
 
-The dsPIC33C CAN-TP Demo shows an example configuration of the CAN-TP module as well as how CAN-TP handles messages by having two boards transmitting and receiveing messages over a CAN Bus.
+The dsPIC33C CAN-TP Demo shows an example configuration of the CAN-TP module (Which follows the ISO 15765-2). The purpose of his demo is to also show how CAN-TP handles messages by having two boards transmitting and receiveing messages over a CAN Bus.
 
 The MPLAB® X demo projects included are set up to utilize specific boards defined in the required hardware section below. The dsPIC33C CAN-TP Demo utilizes resources that are available on most boards(LEDs, Buttons, and mikroBUS slot) allowing the project to be portable to other hardware.
 
