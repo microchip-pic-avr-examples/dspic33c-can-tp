@@ -117,7 +117,7 @@ The setup below describes the setup for the two boards as well as the CAN/CAN-FD
         - TMR1 for the timer dependency for CAN-TP
         - MessageID is set to 0xA1
 
-    6. Within the Pin Grid View for your board select Pins for the following: (Refer to the board/devices schematics and Pin mapping to choose the correct selections for each option below)
+    6. Within the Pin Grid View for your board select pins for the following: (Refer to the board/devices schematics and Pin mapping to choose the correct selections for each option below)
         - Select an LED as output
         - Select an Button for input
         - Select the CAN1TX for your board
@@ -156,7 +156,7 @@ The setup below describes the setup for the two boards as well as the CAN/CAN-FD
         - TMR1 for the timer dependency for CAN-TP
         - MessageID is set to 0xA2
 
-    6. Within the Pin Grid View for your board select Pins for the following: (Refer to the board/devices schematics and Pin mapping to choose the correct selections for each option below)
+    6. Within the Pin Grid View for your board select pins for the following: (Refer to the board/devices schematics and Pin mapping to choose the correct selections for each option below)
         - Select an LED as output
         - Select the CAN1TX for your board
         - Select the CAN1RX for your board
