@@ -81,7 +81,7 @@ The dsPIC33C CAN-TP Demo uses the dsPIC33CK256MP508 PIM with Explorer 16/32 Deve
 
 # Operation
 
-After programming both boards, ensure both are powered on. Pressing the button S1 on Explorer 16/32 board will start the transmission and reception of the messages between the two devices. 
+After programming both boards, ensure both are powered on. Pressing the button S3 on Explorer 16/32 board will start the transmission and reception of the messages between the two devices. 
 
 As one board transmits a message the board recieving that message utilizes the first byte of the message to update its state. The current state will be shown by toggling the LED at different speeds. All other data in the message is strictly added to show the frame types handled by CAN-TP (Refer to **Figure 2** below regarding the frame types). 
 
