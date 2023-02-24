@@ -7,7 +7,7 @@
       "version":"1.0.0",
       "displayName":"dsPIC33C CAN-TP Demo",
       "projectName":"dspic33c-can-tp",
-      "shortDescription":"This MPLAB X Melody example shows CAN-Transport (ISO-15765-2) communication via CAN-FD between two dsPIC33C devices.",
+      "shortDescription":"This MPLAB® X Melody example shows CAN-Transport (ISO-15765-2) communication via CAN-FD between two dsPIC33C devices.",
       "ide":{
          "name":"MPLABX",
          "semverRange":">=5.40.0"
