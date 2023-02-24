@@ -9,7 +9,7 @@ The MPLAB® X demo projects included are set up to utilize specific boards defin
 
 ## Related Documentation
 
-[CAN-TP Documentation](https://onlinedocs.microchip.com/oxy/GUID-9C356E20-C5BD-430F-8C0B-CCA1B85ECC7C-en-US-1/GUID-819906F0-FAB5-48EC-8698-1788965B4BAD.html)
+[CAN-TP Documentation](https://onlinedocs.microchip.com/v2/keyword-lookup?keyword=CANTP.OVERVIEW&version=latest&redirect=true)
 
 ## Software Used
 
