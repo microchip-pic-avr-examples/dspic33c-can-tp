@@ -9,7 +9,7 @@ The MPLAB® X demo projects included are set up to utilize specific boards defin
 
 ## Related Documentation
 
-[CAN-TP Documentation](https://onlinedocs.microchip.com/oxy/GUID-9C356E20-C5BD-430F-8C0B-CCA1B85ECC7C-en-US-1/GUID-819906F0-FAB5-48EC-8698-1788965B4BAD.html)
+[CAN-TP Documentation](https://onlinedocs.microchip.com/v2/keyword-lookup?keyword=CANTP.OVERVIEW&version=latest&redirect=true)
 
 ## Software Used
 
@@ -65,19 +65,19 @@ The dsPIC33C CAN-TP Demo uses the dsPIC33CK256MP508 PIM with Explorer 16/32 Deve
 # Software Setup
 
 ## Programming the Explorer 16/32 board with dsPIC33CK256MP508 PIM
-    1. Open the dspic33ck-explorer1632-can-tp.X project in the MPLAB® X IDE.
-    2. Right click the project in "Projects" tab of MPLAB® X IDE and select "Set as Main Project".
-    3. Plug in the PICKit 4 from the board to the PC or the PKOB (PICkit On-Board) to the PC.
-    4. Program the device by selecting the "Make and Program Device (Project dspic33ck-exp1632-can-tp)" button on the menu bar.
-    5. The project should build and program successfully.
+1. Open the dspic33ck-explorer1632-can-tp.X project in the MPLAB® X IDE.
+2. Right click the project in "Projects" tab of MPLAB® X IDE and select "Set as Main Project".
+3. Plug in the PICKit 4 from the board to the PC or the PKOB (PICkit On-Board) to the PC.
+4. Program the device by selecting the "Make and Program Device (Project dspic33ck-exp1632-can-tp)" button on the menu bar.
+5. The project should build and program successfully.
     
 
 ## Setup for project: dspic33ck-curiosity-can-tp
-    1. Open the dspic33ck-curiosity-can-tp.X project in the MPLAB® X IDE.
-    2. Right click the project in "Projects" tab of MPLAB® X IDE and select "Set as Main Project".
-    3. Plug the PKOB (PICkit On-Board) to the PC.
-    4. Program the device by selecting the "Make and Program Device (Project dspic33ck-curiosity-can-tp)" button on the menu bar.
-    5. The project should build and program successfully.
+1. Open the dspic33ck-curiosity-can-tp.X project in the MPLAB® X IDE.
+2. Right click the project in "Projects" tab of MPLAB® X IDE and select "Set as Main Project".
+3. Plug the PKOB (PICkit On-Board) to the PC.
+4. Program the device by selecting the "Make and Program Device (Project dspic33ck-curiosity-can-tp)" button on the menu bar.
+5. The project should build and program successfully.
 
 # Operation
 
@@ -93,86 +93,86 @@ The transmission and reception of the messages will continue until one board is 
 
 # Porting the CAN-TP demo to use a different Board/Device
 ## Device Requirements:
-    - Any dsPIC device that supports CAN/CAN-FD in MCC Melody. 
+- Any dsPIC device that supports CAN/CAN-FD in MCC Melody. 
 ## Board Requirements:
-    - LED           (one for each board to show the different states) 
-    - Button        (Used for one board ONLY to trigger the start of the loop)
-    - mikroBUS slot (one for each board to utilize the MCP2542 click board)
+- LED           (one for each board to show the different states) 
+- Button        (Used for one board ONLY to trigger the start of the loop)
+- mikroBUS slot (one for each board to utilize the MCP2542 click board)
     
 The setup below describes the setup for the two boards as well as the CAN/CAN-FD configurations to use. Refer to the **Commonly Used PIMS/Board Pin Selections** section below for more information.
 
 ## Setup for Board 1:
 
-    The project for board 1 kicks off the message passing. It requires a button and an LED. This will utilize the dspic33ck-exp1632-can-tp.X project to receive, process and respond to devices with an ID of 0xA2.
+The project for board 1 kicks off the message passing. It requires a button and an LED. This will utilize the dspic33ck-exp1632-can-tp.X project to receive, process and respond to devices with an ID of 0xA2.
 
-    1. Open the dspic33ck-exp1632-can-tp.X project in the MPLAB® X IDE. 
+1. Open the dspic33ck-exp1632-can-tp.X project in the MPLAB® X IDE. 
 
-    2. Right click the project in "Projects" tab of MPLAB® X IDE and select Properties. Change the device to the one you are using and select an XC compiler. Apply these settings and continue with the next steps.
+2. Right click the project in "Projects" tab of MPLAB® X IDE and select Properties. Change the device to the one you are using and select an XC compiler. Apply these settings and continue with the next steps.
 
-    3. Right click the project in "Projects" tab of MPLAB® X IDE and select "Set as Main Project".
+3. Right click the project in "Projects" tab of MPLAB® X IDE and select "Set as Main Project".
 
-    4. Open Melody by selecting the MCC button.
+4. Open Melody by selecting the MCC button.
 
-    5. Ensure CAN-TP is added to the project and configure the following:
-        - TMR1 for the timer dependency for CAN-TP
-        - MessageID is set to 0xA1
+5. Ensure CAN-TP is added to the project and configure the following:
+    - TMR1 for the timer dependency for CAN-TP
+    - MessageID is set to 0xA1
 
-    6. Within the Pin Grid View for your board select pins for the following: (Refer to the board/devices schematics and Pin mapping to choose the correct selections for each option below)
-        - Select an LED as output
-        - Select an Button for input
-        - Select the CAN1TX for your board
-        - Select the CAN1RX for your board
+6. Within the Pin Grid View for your board select pins for the following: (Refer to the board/devices schematics and Pin mapping to choose the correct selections for each option below)
+    - Select an LED as output
+    - Select an Button for input
+    - Select the CAN1TX for your board
+    - Select the CAN1RX for your board
 
-    7. Within Pins resource under the Project Resources tab:
-        - For the button input selected make the following configurations
-            - Enable Weak pullup
-            - Select interrupt on negative change
-            - Change the custom name to be BUTTON
-        - For the LED selected make the folowing configurations
-            - Change the custom name to be LED
+7. Within Pins resource under the Project Resources tab:
+    - For the button input selected make the following configurations
+        - Enable Weak pullup
+        - Select interrupt on negative change
+        - Change the custom name to be BUTTON
+    - For the LED selected make the folowing configurations
+        - Change the custom name to be LED
 
-    8. Select CAN_FD1 and do the following:
-        - Enable Data Bit Rate and Set Bit Rate to 2Mbps
-        - In filter0's Message ID Set it to 0xA2
+8. Select CAN_FD1 and do the following:
+    - Enable Data Bit Rate and Set Bit Rate to 2Mbps
+    - In filter0's Message ID Set it to 0xA2
 
-    9. Select the Generate Button under project resources.
-        - DO NOT overwrite the contents of the main.c.
+9. Select the Generate Button under project resources.
+    - DO NOT overwrite the contents of the main.c.
 
-    10. Build and Program the board.
+10. Build and Program the board.
 
 ## Setup for Board 2:
 
-    The project for board 2 waits until it receives a message before responding. It requires an LED. This will utilize the dspic33ck-curiosity-can-tp to receive, process and respond to devices with an ID of 0xA1.
+The project for board 2 waits until it receives a message before responding. It requires an LED. This will utilize the dspic33ck-curiosity-can-tp to receive, process and respond to devices with an ID of 0xA1.
 
-    1. Open the dspic33ck-curiosity-can-tp.X project in the MPLAB® X IDE. 
+1. Open the dspic33ck-curiosity-can-tp.X project in the MPLAB® X IDE. 
 
-    2. Right click the project in "Projects" tab of MPLAB® X IDE and select Properties. Change the device to the one you are using and select an XC compiler. Apply these settings and continue with the next steps.
+2. Right click the project in "Projects" tab of MPLAB® X IDE and select Properties. Change the device to the one you are using and select an XC compiler. Apply these settings and continue with the next steps.
 
-    3. Right click the project in "Projects" tab of MPLAB® X IDE and select "Set as Main Project".
+3. Right click the project in "Projects" tab of MPLAB® X IDE and select "Set as Main Project".
 
-    4. Open Melody by selecting the MCC button.
+4. Open Melody by selecting the MCC button.
 
-    5. Ensure CAN-TP is added to the project and configure the following:
-        - TMR1 for the timer dependency for CAN-TP
-        - MessageID is set to 0xA2
+5. Ensure CAN-TP is added to the project and configure the following:
+    - TMR1 for the timer dependency for CAN-TP
+    - MessageID is set to 0xA2
 
-    6. Within the Pin Grid View for your board select pins for the following: (Refer to the board/devices schematics and Pin mapping to choose the correct selections for each option below)
-        - Select an LED as output
-        - Select the CAN1TX for your board
-        - Select the CAN1RX for your board
+6. Within the Pin Grid View for your board select pins for the following: (Refer to the board/devices schematics and Pin mapping to choose the correct selections for each option below)
+    - Select an LED as output
+    - Select the CAN1TX for your board
+    - Select the CAN1RX for your board
 
-    7. Within Pins resource under the Project Resources tab:
-        - For the LED selected make the folowing configurations
-            - Change the custom name to be LED
+7. Within Pins resource under the Project Resources tab:
+    - For the LED selected make the folowing configurations
+        - Change the custom name to be LED
 
-    8. Select CAN_FD1 and do the following:
-        - Enable Data Bit Rate and Set Bit Rate to 2Mbps
-        - In filter0's Message ID Set it to 0xA1
+8. Select CAN_FD1 and do the following:
+    - Enable Data Bit Rate and Set Bit Rate to 2Mbps
+    - In filter0's Message ID Set it to 0xA1
 
-    9. Select the Generate Button under project resources.
-        - DO NOT overwrite the contents of the main.c.
+9. Select the Generate Button under project resources.
+    - DO NOT overwrite the contents of the main.c.
 
-    10. Build and Program the board.
+10. Build and Program the board.
     
 # CAN-TP Project - Drivers
 
