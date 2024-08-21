@@ -15,10 +15,10 @@ The MPLAB® X demo projects included are set up to utilize specific boards defin
 
 ### - Required Software
 
-- MPLAB® X IDE  **6.05** or newer (https://www.microchip.com/MPLABXIDE)
-- MPLAB® XC16 Compiler **2.00** or a newer compiler (https://www.microchip.com/xc16) 
-- MPLAB® Code Configurator (MCC) **5.2.2** or newer (https://www.microchip.com/mcc)
-- MPLAB® Code Configurator (MCC) Melody **2.3.1** or newer (https://www.microchip.com/melody)
+- MPLAB® X IDE  **6.20** or newer (https://www.microchip.com/MPLABXIDE)
+- MPLAB® XC-DSC Compiler **3.10** or a newer compiler (https://www.microchip.com/xc16) 
+- MPLAB® Code Configurator (MCC) **5.7.1** or newer (https://www.microchip.com/mcc)
+- MPLAB® Code Configurator (MCC) Melody **2.7.1** or newer (https://www.microchip.com/melody)
 
 ### - Optional Software
 
@@ -92,8 +92,11 @@ The transmission and reception of the messages will continue until one board is 
 **Figure 2 - Recording over the CAN bus**
 
 # Porting the CAN-TP demo to use a different Board/Device
+
+**CAN-TP v1.1.0 now Supports CAN(Classic/2.0 Mode), if this mode is preferred follow the bolded Note sections below for differences in configuration.** Otherwise the steps will cover updating up the CAN-TP projects with a CAN-FD peripheral. 
+
 ## Device Requirements:
-- Any dsPIC device that supports CAN/CAN-FD in MCC Melody. 
+- Any dsPIC device that supports CAN-TP and CAN/CAN-FD in MCC Melody. 
 ## Board Requirements:
 - LED           (one for each board to show the different states) 
 - Button        (Used for one board ONLY to trigger the start of the loop)
@@ -116,6 +119,7 @@ The project for board 1 kicks off the message passing. It requires a button and 
 5. Ensure CAN-TP is added to the project and configure the following:
     - TMR1 for the timer dependency for CAN-TP
     - MessageID is set to 0xA1
+        #### **Note: If CAN(Classic/2.0 Mode) is preferred Select "CAN(Classic/2.0 Mode)" under the Peripheral Bus Type dropdown.**
 
 6. Within the Pin Grid View for your board select pins for the following: (Refer to the board/devices schematics and Pin mapping to choose the correct selections for each option below)
     - Select an LED as output
@@ -134,6 +138,7 @@ The project for board 1 kicks off the message passing. It requires a button and 
 8. Select CAN_FD1 and do the following:
     - Enable Data Bit Rate and Set Bit Rate to 2Mbps
     - In filter0's Message ID Set it to 0xA2
+    #### **Note: If CAN-TP's dependency is CAN(Classic/2.0 Mode) Ignore the Data Bit Rate enable step.**
 
 9. Select the Generate Button under project resources.
     - DO NOT overwrite the contents of the main.c.
@@ -155,6 +160,7 @@ The project for board 2 waits until it receives a message before responding. It 
 5. Ensure CAN-TP is added to the project and configure the following:
     - TMR1 for the timer dependency for CAN-TP
     - MessageID is set to 0xA2
+        #### **Note: If CAN(Classic/2.0 Mode) is selected for board 1, Select "CAN(Classic/2.0 Mode)" under the Peripheral Bus Type dropdown.**
 
 6. Within the Pin Grid View for your board select pins for the following: (Refer to the board/devices schematics and Pin mapping to choose the correct selections for each option below)
     - Select an LED as output
@@ -168,6 +174,7 @@ The project for board 2 waits until it receives a message before responding. It 
 8. Select CAN_FD1 and do the following:
     - Enable Data Bit Rate and Set Bit Rate to 2Mbps
     - In filter0's Message ID Set it to 0xA1
+        #### **Note: If CAN-TP's dependency is CAN(Classic/2.0 Mode) Ignore the Data Bit Rate enable step.**
 
 9. Select the Generate Button under project resources.
     - DO NOT overwrite the contents of the main.c.
