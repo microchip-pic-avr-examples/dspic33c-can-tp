@@ -8,7 +8,9 @@
 ; 
 ; @brief     Assembly language optimized helper routines required for calibration
 ;
-; @version   Driver Version 1.1.0
+; @skipline @version   Firmware Driver Version 1.2.1
+;
+; @skipline @version   PLIB Version 1.1.1
 ;
 ; @skipline  Device : dsPIC33CK256MP508
 ;
@@ -55,6 +57,7 @@
  * ;uint32_t  DMT_CalibratedCounterGet(void);
  * Gets the count of DMT counter just before calling CalibratedCounterGet function
  *
+ * @param    none
  * @return   32-bit (unsigned long) caliberated count
  *                      
  *   Registers used:  w0 w1 w2
@@ -68,7 +71,7 @@
     reset
     
  _DMT_CalibratedCounterGet:
-        rcall _DMT_CounterGet
+        call _DMT_CounterGet
         push w2
         mov _calibOffset, w2
         SUBR w2, w0, w0
@@ -98,7 +101,7 @@
 		push w2
 		mov DMTCNTL, w0
 		push w0
-		rcall _DMT_CounterGet
+		call _DMT_CounterGet
 		pop w2
 		sub w0, w2, w2
 		dec w2, w2
@@ -106,5 +109,5 @@
 		pop w2
 		pop w1
 		pop w0
-		return;
+		return
 

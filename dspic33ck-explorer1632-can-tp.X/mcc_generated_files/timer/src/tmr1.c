@@ -7,13 +7,15 @@
  * 
  * @brief     This is the generated driver source file for TMR1 driver
  *
- * @version   Driver Version 1.4.0
+ * @skipline @version   Firmware Driver Version 1.6.1
+ *
+ * @skipline @version   PLIB Version 1.5.4
  *
  * @skipline  Device : dsPIC33CK256MP508
 */
 
 /*
-© [2023] Microchip Technology Inc. and its subsidiaries.
+© [2024] Microchip Technology Inc. and its subsidiaries.
 
     Subject to your compliance with these terms, you may use Microchip 
     software and any derivatives exclusively with Microchip products. 
@@ -35,6 +37,7 @@
 
 // Section: Included Files
 #include "../tmr1.h"
+#include "../timer_interface.h"
 
 // Section: Data Type Definitions
 
@@ -47,14 +50,16 @@ static void (*TMR1_TimeoutHandler)(void) = NULL;
 
 // Section: Driver Interface
 
-const struct TIMER_INTERFACE Timer1 = {
+const struct TIMER_INTERFACE CAN_TP_TIMER = {
     .Initialize            = &TMR1_Initialize,
     .Deinitialize          = &TMR1_Deinitialize,
     .Start                 = &TMR1_Start,
     .Stop                  = &TMR1_Stop,
+    #if TIMER_PERIODCOUNTSET_API_SUPPORT
     .PeriodCountSet        = &TMR1_PeriodCountSet,
+    #endif
     .PeriodSet             = &TMR1_PeriodSet,
-	.PeriodGet             = &TMR1_PeriodGet,
+    .PeriodGet             = &TMR1_PeriodGet,
     .CounterGet            = &TMR1_CounterGet,
     .InterruptPrioritySet  = &TMR1_InterruptPrioritySet,
     .TimeoutCallbackRegister = &TMR1_TimeoutCallbackRegister,
@@ -65,7 +70,7 @@ const struct TIMER_INTERFACE Timer1 = {
 
 void TMR1_Initialize (void)
 {
-    //TCS FOSC/2; TSYNC disabled; TCKPS 1:1; TGATE disabled; TECS ; PRWIP Write complete; TMWIP Write complete; TMWDIS disabled; TSIDL disabled; TON disabled; 
+    //TCS FOSC/2; TSYNC disabled; TCKPS 1:1; TGATE disabled; TECS FOSC/2; PRWIP Write complete; TMWIP Write complete; TMWDIS disabled; TSIDL disabled; TON disabled; 
     T1CON = 0x0;
     //TMR 0x0; 
     TMR1 = 0x0;
@@ -83,7 +88,7 @@ void TMR1_Deinitialize (void)
     
     T1CON = 0x0;
     TMR1 = 0x0;
-    PR1 = 0x0;
+    PR1 = 0xFFFF;
 }
 
 void TMR1_Start( void )

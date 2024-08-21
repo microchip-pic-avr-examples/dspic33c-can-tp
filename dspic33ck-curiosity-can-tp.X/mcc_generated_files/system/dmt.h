@@ -9,13 +9,15 @@
  *            is to interrupt the processor in the event of a software 
  *            malfunction.
  *
- * @version   Driver Version 1.1.1
+ * @skipline @version   Firmware Driver Version 1.2.1
+ *
+ * @skipline @version   PLIB Version 1.1.1
  *
  * @skipline  Device : dsPIC33CK256MP508
 */
 
 /*
-© [2023] Microchip Technology Inc. and its subsidiaries.
+© [2024] Microchip Technology Inc. and its subsidiaries.
 
     Subject to your compliance with these terms, you may use Microchip 
     software and any derivatives exclusively with Microchip products. 
@@ -47,6 +49,7 @@
 /**
  * @ingroup  dmtdriver
  * @brief    Initializes the DMT module
+ * @param    none
  * @return   none
  */
 void DMT_Initialize ( void );
@@ -55,6 +58,7 @@ void DMT_Initialize ( void );
  * @ingroup  dmtdriver
  * @brief    Writes the PreClear Pattern for DMTPRECLR register. 
  * @pre      This function should be called before calling \ref DMT_Clear
+ * @param    none
  * @return   none
  */
 void DMT_PreClear(void);
@@ -62,6 +66,7 @@ void DMT_PreClear(void);
 /**
  * @ingroup  dmtdriver
  * @brief    Enables the DMT module
+ * @param    none
  * @return   none
  */
 void DMT_Enable(void);
@@ -70,6 +75,7 @@ void DMT_Enable(void);
  * @ingroup  dmtdriver
  * @brief    Checks the PreClear Status and clears the DMT Fetch Counter
  * @pre      \ref DMT_PreClear() should be called for the associated function to work
+ * @param    none
  * @return   none
  */
 void DMT_Clear(void);
@@ -77,6 +83,7 @@ void DMT_Clear(void);
 /**
  * @ingroup  dmtdriver
  * @brief    Returns the Window Open status
+ * @param    none
  * @return   true  - Window Open status bit is set 
  * @return   false - Window Open status bit is not set
  */
@@ -86,6 +93,7 @@ bool DMT_IsWindowOpen(void);
  * @ingroup  dmtdriver
  * @brief    Checks for the PreClear sequence was initiated and 
  *           done before the Clear sequence is done.
+ * @param    none
  * @return   true  - PreClear sequence performed successfully 
  * @return   false - PreClear sequence failed 
  */
@@ -94,6 +102,7 @@ bool DMT_IsPreCleared(void);
 /**
  * @ingroup  dmtdriver
  * @brief    Reads the DMT counter register 
+ * @param    none
  * @return   32 bit timeout counter value
  */
 uint32_t DMT_TimeoutCounterGet(void);
@@ -101,6 +110,7 @@ uint32_t DMT_TimeoutCounterGet(void);
 /**
  * @ingroup  dmtdriver
  * @brief    Reads the DMT Window Interval Counter
+ * @param    none
  * @return   32-bit window interval counter value
  */
 uint32_t DMT_WindowTimeoutCounterGet(void);
@@ -108,6 +118,7 @@ uint32_t DMT_WindowTimeoutCounterGet(void);
 /**
  * @ingroup  dmtdriver
  * @brief    Gets the DMT status
+ * @param    none
  * @return   status value of DMT
  */
 uint16_t DMT_StatusGet(void);
@@ -117,6 +128,7 @@ uint16_t DMT_StatusGet(void);
  * @brief    Returns the current counter value 
  * @pre      Value will not be compensated for the instructions involved in 
  *           call-stack-push, reading SFR and call-stack-pop operations.
+ * @param    none
  * @return   Returns the 32 bit counter value
  */
 uint32_t DMT_CounterGet(void);
@@ -126,6 +138,7 @@ uint32_t DMT_CounterGet(void);
  * @brief    Returns the current counter value
  * @pre      Value will be compensated for the instructions involved in 
  *           call-stack-push, reading SFR and call-stack-pop operations.
+ * @param    none
  * @return   Returns the 32 bit counter value
  */
 uint32_t DMT_CalibratedCounterGet(void);
@@ -137,13 +150,14 @@ uint32_t DMT_CalibratedCounterGet(void);
  * @param[in]  handler - Address of the callback function.  
  * @return     none
  */
-void DMT_EventCallbackRegister(void* handler);
+void DMT_EventCallbackRegister(void (*handler)(void));
 
 /**
  * @ingroup  dmtdriver
  * @brief    This is the default callback with weak attribute. The user can 
  *           override and implement the default callback without weak attribute 
  *           or can register a custom callback function using  \ref DMT_EventCallbackRegister.
+ * @param    none
  * @return   none  
  */
 void DMT_EventCallback(void);

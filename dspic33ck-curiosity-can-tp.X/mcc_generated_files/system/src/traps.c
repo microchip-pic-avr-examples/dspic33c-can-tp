@@ -7,13 +7,15 @@
  *            
  * @brief     This is the generated driver source file for TRAPS driver
  *            
- * @version   Driver Version 1.0.1
+ * @skipline @version   Firmware Driver Version 1.0.3
+ *
+ * @skipline @version   PLIB Version 1.3.1
  *            
  * @skipline  Device : dsPIC33CK256MP508
 */
 
 /*
-© [2023] Microchip Technology Inc. and its subsidiaries.
+© [2024] Microchip Technology Inc. and its subsidiaries.
 
     Subject to your compliance with these terms, you may use Microchip 
     software and any derivatives exclusively with Microchip products. 
@@ -104,6 +106,14 @@ void ERROR_HANDLER _SoftTrapError(void)
       TRAPS_halt_on_error(TRAPS_DOOVR_ERR);
     }
 
+#ifdef _DAE
+    if(INTCON3bits.DAE == 1)
+    {
+      INTCON3bits.DAE = 0;  //Clear the trap flag
+      TRAPS_halt_on_error(TRAPS_DAE_ERR);
+    }
+
+#endif
     if(INTCON3bits.NAE == 1)
     {
       INTCON3bits.NAE = 0;  //Clear the trap flag
