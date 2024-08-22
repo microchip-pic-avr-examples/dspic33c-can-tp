@@ -2,12 +2,12 @@
 
 manifest_file_version: 1.0.0
 project: dspic33ck-explorer1632-can-tp
-creation_date: 2024-08-21T14:24:13.820-07:00[America/Phoenix]
+creation_date: 2024-08-22T09:35:47.709-07:00[America/Phoenix]
 operating_system: Windows 10
 mcc_mode: IDE
 mcc_mode_version: v6.20
 device_name: dsPIC33CK256MP508
-compiler: XC16 2.00
+compiler: XCDSC 3.10
 mcc_version: 5.5.1
 mcc_core_version: 5.7.1
 content_manager_version: 5.0.1
@@ -20,6 +20,7 @@ modules:
 - {name: '@mchp-mcc/can-fd-driver', type: MELODY, version: 1.2.3}
 - {name: '@mchp-mcc/can-tp', type: MELODY, version: 1.1.0}
 - {name: '@mchp-mcc/clock-16bit-driver', type: MELODY, version: 1.2.1}
+- {name: '@mchp-mcc/delay-blocking-driver', type: MELODY, version: 3.2.0}
 - {name: '@mchp-mcc/dmt-16bit-driver', type: MELODY, version: 1.0.7}
 - {name: '@mchp-mcc/dspic33-configuration-bits', type: MELODY, version: 1.2.2}
 - {name: '@mchp-mcc/icd-16bit-driver', type: MELODY, version: 1.0.3}

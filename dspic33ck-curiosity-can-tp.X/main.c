@@ -25,6 +25,7 @@
 #include "mcc_generated_files/can/can_tp.h"
 #include "mcc_generated_files/can/can_tp_config.h"
 #include "mcc_generated_files/timer/tmr1.h"
+#include "mcc_generated_files/timer/delay.h"
 #include <libpic30.h>
 
 #if defined(CAN_TP_PAUSE_ON_FIRST_FRAME) && CAN_TP_PAUSE_ON_FIRST_FRAME == true
@@ -32,8 +33,6 @@
 #error "If pause on first frame is enabled the device will not send packets after First Frame until CAN_TP_RxResume() has been called."
 #endif
 
-//1 second delay depending on the clock frequency
-#define LONG_DELAY 4000000
 uint8_t rxBuffer[512];
 
 /**
@@ -132,7 +131,7 @@ int main(void)
             CAN_TP_MessageGet(rxBuffer);
             Set_Ticks(rxBuffer[0]);
             Update_Message();
-            __delay32(LONG_DELAY);
+            DELAY_milliseconds(1000);
             CAN_TP_MessageSend(txBuffer, sizeof(txBuffer));
         }
     }    

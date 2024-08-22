@@ -32,6 +32,7 @@
         <logicalFolder name="timer" displayName="timer" projectFiles="true">
           <itemPath>mcc_generated_files/timer/timer_interface.h</itemPath>
           <itemPath>mcc_generated_files/timer/tmr1.h</itemPath>
+          <itemPath>mcc_generated_files/timer/delay.h</itemPath>
         </logicalFolder>
       </logicalFolder>
     </logicalFolder>
@@ -74,6 +75,7 @@
         <logicalFolder name="timer" displayName="timer" projectFiles="true">
           <logicalFolder name="src" displayName="src" projectFiles="true">
             <itemPath>mcc_generated_files/timer/src/tmr1.c</itemPath>
+            <itemPath>mcc_generated_files/timer/src/delay.c</itemPath>
           </logicalFolder>
         </logicalFolder>
       </logicalFolder>
