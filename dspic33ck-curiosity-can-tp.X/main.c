@@ -131,7 +131,7 @@ int main(void)
             CAN_TP_MessageGet(rxBuffer);
             Set_Ticks(rxBuffer[0]);
             Update_Message();
-            DELAY_milliseconds(1000);
+            DELAY_milliseconds(2000);
             CAN_TP_MessageSend(txBuffer, sizeof(txBuffer));
         }
     }    
