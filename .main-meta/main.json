@@ -4,25 +4,25 @@
    "content":{
       "metaDataVersion":"1.3.0",
       "name":"com.microchip.mplabx.project.dspic33c-can-tp",
-      "version":"1.0.0",
+      "version":"1.0.1",
       "displayName":"dsPIC33C CAN-TP Demo",
       "projectName":"dspic33c-can-tp",
       "shortDescription":"This MPLAB® X Melody example shows CAN-Transport (ISO-15765-2) communication via CAN-FD between two dsPIC33C devices.",
       "ide":{
          "name":"MPLABX",
-         "semverRange":">=5.40.0"
+         "semverRange":">=6.20"
       },
       "compiler":{
-         "name":"XC16",
-         "semverRange":"^1.50.0"
+         "name":"XCDSC",
+         "semverRange":"^3.10"
       },
       "dfp":{
          "name":"dsPIC33CK-MP_DFP",
-         "semverRange":">=1.10.341"
+         "semverRange":">=1.13.366"
       },
 	  "configurator": {
          "name": "MCC",
-         "semverRange": ">=4.0.1"
+         "semverRange": ">=5.7.1"
       },
       "device":{
          "metaDataVersion":"1.0.0",

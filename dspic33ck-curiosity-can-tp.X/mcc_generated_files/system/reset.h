@@ -6,14 +6,16 @@
  * @defgroup  resetdriver Reset Driver
  *            
  * @brief     Reset driver using dsPIC MCUs.  
- *            
- * @version   Driver Version 1.0.0
- *            
+ *
+ * @skipline @version   Firmware Driver Version 1.0.3
+ *
+ * @skipline @version   PLIB Version 1.1.0
+ *
  * @skipline  Device : dsPIC33CK256MP508
 */
 
 /*
-© [2023] Microchip Technology Inc. and its subsidiaries.
+© [2024] Microchip Technology Inc. and its subsidiaries.
 
     Subject to your compliance with these terms, you may use Microchip 
     software and any derivatives exclusively with Microchip products. 
@@ -45,6 +47,7 @@
  * @pre      This function should be called before any use of CLRWDT
  *           since it has a side-effect of clearing the appropriate bits in the
  *           register showing reset cause.
+ * @param    none
  * @return   Returns a value corresponding to a possible cause for reset.
  */
 uint16_t RESET_CauseGet(void);
@@ -54,6 +57,7 @@ uint16_t RESET_CauseGet(void);
  * @brief    It handles the reset cause by clearing the cause register values.
  *           This is a weak attribute function. The user can 
  *           override and implement the same function without weak attribute.
+ * @param    none
  * @return   none  
  */
 void RESET_CauseHandler(void);
@@ -61,9 +65,10 @@ void RESET_CauseHandler(void);
 /**
  * @ingroup  resetdriver
  * @brief    Clears the Reset Cause register
+ * @param    none
  * @return   none  
  */
-void RESET_CauseClearAll();
+void RESET_CauseClearAll(void);
 
 #endif    /* RESET_H */
 /**

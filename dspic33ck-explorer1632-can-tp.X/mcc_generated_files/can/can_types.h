@@ -7,15 +7,15 @@
  * 
  * @brief     This is the generated driver types header file for the CAN driver using CCL
  *
- * @version   Firmware Driver Version 1.3.0
+ * @skipline @version   Firmware Driver Version 1.3.1
  *
- * @version   PLIB Version 1.5.0
+ * @skipline @version   PLIB Version 1.7.1
  *
  * @skipline  Device : dsPIC33CK256MP508
 */
 
 /*
-© [2023] Microchip Technology Inc. and its subsidiaries.
+© [2024] Microchip Technology Inc. and its subsidiaries.
 
     Subject to your compliance with these terms, you may use Microchip 
     software and any derivatives exclusively with Microchip products. 

@@ -7,13 +7,15 @@
  *            
  * @brief     Interrupt Priority configuration driver using dsPIC MCUs.
  *            
- * @version   Driver Version 1.1.0
+ * @skipline @version   Firmware Driver Version 1.1.2
+ *
+ * @skipline @version   PLIB Version 1.3.1
  *            
  * @skipline  Device : dsPIC33CK256MP508
 */
 
 /*
-© [2023] Microchip Technology Inc. and its subsidiaries.
+© [2024] Microchip Technology Inc. and its subsidiaries.
 
     Subject to your compliance with these terms, you may use Microchip 
     software and any derivatives exclusively with Microchip products. 
@@ -41,6 +43,7 @@
 /**
  * @ingroup  interruptdriver
  * @brief    Initializes the interrupt priorities of the modules that have been configured
+ * @param    none
  * @return   none  
  */
 void INTERRUPT_Initialize(void);
@@ -48,6 +51,7 @@ void INTERRUPT_Initialize(void);
 /**
  * @ingroup  interruptdriver
  * @brief    Deinitializes the INTERRUPT to POR values
+ * @param    none
  * @return   none  
  */
 void INTERRUPT_Deinitialize(void);
@@ -55,6 +59,7 @@ void INTERRUPT_Deinitialize(void);
 /**
  * @ingroup  interruptdriver
  * @brief    Enables the global interrupt bit
+ * @param    none
  * @return   none  
  */
 inline static void INTERRUPT_GlobalEnable(void)
@@ -65,6 +70,7 @@ inline static void INTERRUPT_GlobalEnable(void)
 /**
  * @ingroup  interruptdriver
  * @brief    Disables the global interrupt bit
+ * @param    none
  * @return   none  
  */
 inline static void INTERRUPT_GlobalDisable(void)
@@ -75,6 +81,7 @@ inline static void INTERRUPT_GlobalDisable(void)
 /**
  * @ingroup  interruptdriver
  * @brief    Returns the pending Interrupt Vector number
+ * @param    none
  * @return   Returns the pending Interrupt Vector number  
  */
 inline static uint16_t INTERRUPT_VectorNumberGet(void)

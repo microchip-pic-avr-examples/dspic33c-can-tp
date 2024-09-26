@@ -7,29 +7,28 @@
  *            
  * @brief     This is the generated adaptor source file for CAN-TP.
  *            
- * @version   Driver Version 1.0.0
+ * @version   Driver Version 1.1.0
 */
 
 /*
-    (c) 2022 Microchip Technology Inc. and its subsidiaries. You may use this
-    software and any derivatives exclusively with Microchip products.
+© [2024] Microchip Technology Inc. and its subsidiaries.
 
-    THIS SOFTWARE IS SUPPLIED BY MICROCHIP "AS IS". NO WARRANTIES, WHETHER
-    EXPRESS, IMPLIED OR STATUTORY, APPLY TO THIS SOFTWARE, INCLUDING ANY IMPLIED
-    WARRANTIES OF NON-INFRINGEMENT, MERCHANTABILITY, AND FITNESS FOR A
-    PARTICULAR PURPOSE, OR ITS INTERACTION WITH MICROCHIP PRODUCTS, COMBINATION
-    WITH ANY OTHER PRODUCTS, OR USE IN ANY APPLICATION.
-
-    IN NO EVENT WILL MICROCHIP BE LIABLE FOR ANY INDIRECT, SPECIAL, PUNITIVE,
-    INCIDENTAL OR CONSEQUENTIAL LOSS, DAMAGE, COST OR EXPENSE OF ANY KIND
-    WHATSOEVER RELATED TO THE SOFTWARE, HOWEVER CAUSED, EVEN IF MICROCHIP HAS
-    BEEN ADVISED OF THE POSSIBILITY OR THE DAMAGES ARE FORESEEABLE. TO THE
-    FULLEST EXTENT ALLOWED BY LAW, MICROCHIP'S TOTAL LIABILITY ON ALL CLAIMS IN
-    ANY WAY RELATED TO THIS SOFTWARE WILL NOT EXCEED THE AMOUNT OF FEES, IF ANY,
-    THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
-
-    MICROCHIP PROVIDES THIS SOFTWARE CONDITIONALLY UPON YOUR ACCEPTANCE OF THESE
-    TERMS.
+    Subject to your compliance with these terms, you may use Microchip 
+    software and any derivatives exclusively with Microchip products. 
+    You are responsible for complying with 3rd party license terms  
+    applicable to your use of 3rd party software (including open source  
+    software) that may accompany Microchip software. SOFTWARE IS ?AS IS.? 
+    NO WARRANTIES, WHETHER EXPRESS, IMPLIED OR STATUTORY, APPLY TO THIS 
+    SOFTWARE, INCLUDING ANY IMPLIED WARRANTIES OF NON-INFRINGEMENT,  
+    MERCHANTABILITY, OR FITNESS FOR A PARTICULAR PURPOSE. IN NO EVENT 
+    WILL MICROCHIP BE LIABLE FOR ANY INDIRECT, SPECIAL, PUNITIVE, 
+    INCIDENTAL OR CONSEQUENTIAL LOSS, DAMAGE, COST OR EXPENSE OF ANY 
+    KIND WHATSOEVER RELATED TO THE SOFTWARE, HOWEVER CAUSED, EVEN IF 
+    MICROCHIP HAS BEEN ADVISED OF THE POSSIBILITY OR THE DAMAGES ARE 
+    FORESEEABLE. TO THE FULLEST EXTENT ALLOWED BY LAW, MICROCHIP?S 
+    TOTAL LIABILITY ON ALL CLAIMS RELATED TO THE SOFTWARE WILL NOT 
+    EXCEED AMOUNT OF FEES, IF ANY, YOU PAID DIRECTLY TO MICROCHIP FOR 
+    THIS SOFTWARE.
 */
 
 #include <stdbool.h>
@@ -40,9 +39,6 @@
 #include "../can_tp_config.h"
 #include "../can1.h"
 #include "../can_tp_phy_adaptor.h"
-
-static struct CAN_MSG_OBJ rxCanMsg;
-static struct CAN_MSG_OBJ txCanMsg;
         
 static uint8_t DlcToDataBytesGet(const enum CAN_DLC dlc)
 {
@@ -52,36 +48,42 @@ static uint8_t DlcToDataBytesGet(const enum CAN_DLC dlc)
 
 static enum CAN_DLC BytesToDLCGet(uint8_t length)
 {
-    if(length <= 8)
+    enum CAN_DLC dlc = DLC_64;
+
+    if(length <= 8u)
     {
-        return length;
+        dlc = length;
     }
-    else if(length <= 12)
+    else if(length <= 12u)
     {
-        return DLC_12;
+        dlc = DLC_12;
     }
-    else if(length <= 16)
+    else if(length <= 16u)
     {
-        return DLC_16;
+        dlc = DLC_16;
     }
-    else if(length <= 20)
+    else if(length <= 20u)
     {
-        return DLC_20;
+        dlc = DLC_20;
     }
-    else if(length <= 24)
+    else if(length <= 24u)
     {
-        return DLC_24;
+        dlc = DLC_24;
     }
-    else if(length <= 32)
+    else if(length <= 32u)
     {
-        return DLC_32;
+        dlc = DLC_32;
     }
-    else if(length <= 48)
+    else if(length <= 48u)
     {
-        return DLC_48;
+        dlc = DLC_48;
     }
-    
-    return DLC_64;
+    else
+    {
+        dlc = DLC_64;
+    }
+
+    return dlc;
 }
     
 uint8_t CAN_PHY_ReceivedMessageCountGet(void)
@@ -91,27 +93,33 @@ uint8_t CAN_PHY_ReceivedMessageCountGet(void)
 
 bool CAN_PHY_Receive(uint8_t *data, uint8_t *length)
 {
-    if(CAN_FD1.ReceivedMessageCountGet() == 0)
+    struct CAN_MSG_OBJ rxCanMsg;
+    bool isReceived = false;
+
+    if(CAN_FD1.ReceivedMessageCountGet() > 0u)
     {
-        return false;
+        CAN_FD1.Receive(&rxCanMsg);
+
+        *length = DlcToDataBytesGet(rxCanMsg.field.dlc);
+        (void)memcpy(data, rxCanMsg.data, *length);  
+        
+        isReceived = true;
     }
     
-    CAN_FD1.Receive(&rxCanMsg);
-
-    *length = DlcToDataBytesGet(rxCanMsg.field.dlc);
-    memcpy(data, rxCanMsg.data, *length);
-    
-    return true;
+    return isReceived;
 }
 
 bool CAN_PHY_Transmit(uint32_t messageId, bool isEid, uint8_t *data, uint8_t length)
-{    
+{   
+    struct CAN_MSG_OBJ txCanMsg;
+
     txCanMsg.msgId = messageId;
     txCanMsg.data = data;     // Pointer to the buffer to send
     txCanMsg.field.brs = CAN_BRS_MODE;           // 1 bit (Supported only in CAN FD mode)
     txCanMsg.field.dlc = BytesToDLCGet(length);  // amount of data to send.  
     txCanMsg.field.formatType = CAN_FD_FORMAT;   // 1 bit (CAN 2.0 Format or CAN_FD Format)
     txCanMsg.field.frameType  = CAN_FRAME_DATA;  // 1 bit (Data Frame or RTR Frame)
+
     if(isEid == true)
     {
         txCanMsg.field.idType     = CAN_FRAME_EXT;   // 1 bit (Standard Frame or Extended Frame)

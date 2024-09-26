@@ -7,12 +7,14 @@
  * 
  * @brief     Watchdog Timer Driver using dsPIC MCUs.
  *
- * @version   Driver Version 1.0.0
+ * @skipline @version   Firmware Driver Version 1.0.2
+ *
+ * @skipline @version   PLIB Version 1.2.1
  *
  * @skipline  Device : dsPIC33CK256MP508
 */
 /*
-© [2023] Microchip Technology Inc. and its subsidiaries.
+© [2024] Microchip Technology Inc. and its subsidiaries.
 
     Subject to your compliance with these terms, you may use Microchip 
     software and any derivatives exclusively with Microchip products. 
@@ -48,6 +50,7 @@
 /**
  * @ingroup  watchdogdriver
  * @brief    This inline function is used to enable the Watchdog Timer (WDT) using the software bit
+ * @param    none
  * @return   none  
  */
 inline static void WATCHDOG_TimerSoftwareEnable(void)
@@ -58,6 +61,7 @@ inline static void WATCHDOG_TimerSoftwareEnable(void)
 /**
  * @ingroup  watchdogdriver
  * @brief    This inline function is used to disable the Watchdog Timer (WDT) using the software bit
+ * @param    none
  * @return   none  
  */
 inline static void WATCHDOG_TimerSoftwareDisable(void)
@@ -68,6 +72,7 @@ inline static void WATCHDOG_TimerSoftwareDisable(void)
 /**
  * @ingroup  watchdogdriver
  * @brief    This inline function is used to clear the Watchdog Timer (WDT)
+ * @param    none
  * @return   none  
  */
 inline static void WATCHDOG_TimerClear(void)
