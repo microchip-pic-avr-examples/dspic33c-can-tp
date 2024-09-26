@@ -1,8 +1,8 @@
 # CAN-TP Demo v1.0.1
 
 ### Release Highlights
-- Updated melody Content versions to latest released.
+- Updated to use latest CAN-TP library and Delay Blocking Driver
 
 ### Features Added\Updated
 - Use the latest released CAN-TP library v1.1.0.
-- Added Delay Module to replace previous delay implementation.
+- Added Melody Delay Blocking Driver.
