@@ -16,7 +16,7 @@ The MPLAB® X demo projects included are set up to utilize specific boards defin
 ### - Required Software
 
 - MPLAB® X IDE  **6.20** or newer (https://www.microchip.com/MPLABXIDE)
-- MPLAB® XC-DSC Compiler **3.10** or a newer compiler (https://www.microchip.com/xc16) 
+- MPLAB® XC-DSC Compiler **3.10** or a newer compiler (https://www.microchip.com/xcdsc) 
 - MPLAB® Code Configurator (MCC) **5.7.1** or newer (https://www.microchip.com/mcc)
 - MPLAB® Code Configurator (MCC) Melody **2.7.1** or newer (https://www.microchip.com/melody)
 
@@ -27,7 +27,7 @@ The MPLAB® X demo projects included are set up to utilize specific boards defin
 ## Hardware Used
 
 ### - Required Hardware
-- Debugging tool: MPLAB® PICkit™ 4 In-Circuit Debugger (https://www.microchip.com/PICkit4) **or** PKOB (PICkit On-Board)
+- Debugging tool: MPLAB® PICkit™ 5 In-Circuit Debugger (https://www.microchip.com/PICkit5)
 - MCP2542 Click x2 (https://www.mikroe.com/mcp2542-click)
 - CAN BUS - 1 to 1 CAN cable.
 - dsPIC33CK Curiosity Development Board (https://www.microchip.com/dsPIC33CKCuriosity)
@@ -46,11 +46,11 @@ The dsPIC33C CAN-TP Demo uses the dsPIC33CK256MP508 PIM with Explorer 16/32 Deve
 1. The Explorer 16/32 board requires the following:
     - MCP2542 Click - inserted into the mikroBUS A slot
     - dsPIC33CK256MP508 PIM inserted into the designated slot
-    - USB cable connected from the PC to the PKOB or PICkit 4
+    - USB cable connected from the PC to the PICkit™ 5
 
 2. The Curiosity board requires the following:
     - MCP2542 Click - inserted into the mikroBUS A slot
-    - USB cable connected from the PC to the PKOB
+    - USB cable connected from the PC to the PICkit™ 5
 
 3. Connect the devices together using an CAN cable:
     - Insert the ends into each MCP2542 click board
@@ -67,7 +67,7 @@ The dsPIC33C CAN-TP Demo uses the dsPIC33CK256MP508 PIM with Explorer 16/32 Deve
 ## Programming the Explorer 16/32 board with dsPIC33CK256MP508 PIM
 1. Open the dspic33ck-explorer1632-can-tp.X project in the MPLAB® X IDE.
 2. Right click the project in "Projects" tab of MPLAB® X IDE and select "Set as Main Project".
-3. Plug in the PICKit 4 from the board to the PC or the PKOB (PICkit On-Board) to the PC.
+3. Plug in the PICKit™ 5 from the board to the PC.
 4. Program the device by selecting the "Make and Program Device (Project dspic33ck-exp1632-can-tp)" button on the menu bar.
 5. The project should build and program successfully.
     
@@ -75,7 +75,7 @@ The dsPIC33C CAN-TP Demo uses the dsPIC33CK256MP508 PIM with Explorer 16/32 Deve
 ## Setup for project: dspic33ck-curiosity-can-tp
 1. Open the dspic33ck-curiosity-can-tp.X project in the MPLAB® X IDE.
 2. Right click the project in "Projects" tab of MPLAB® X IDE and select "Set as Main Project".
-3. Plug the PKOB (PICkit On-Board) to the PC.
+3. Plug in the PICKit™ 5 from the board to the PC.
 4. Program the device by selecting the "Make and Program Device (Project dspic33ck-curiosity-can-tp)" button on the menu bar.
 5. The project should build and program successfully.
 
