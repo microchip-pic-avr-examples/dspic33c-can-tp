@@ -6,14 +6,16 @@
  * @defgroup  config_bitsdriver CONFIGBITS Driver
  *            
  * @brief     Device Configuration Bits using dsPIC MCUs
- *            
- * @version   Driver Version 1.0.0
- *            
+ *
+ * @version   Firmware Driver Version 1.0.1
+ *
+ * @version   PLIB Version 1.2.2
+ *
  * @skipline  Device : dsPIC33CK256MP508
 */
 
 /*
-© [2023] Microchip Technology Inc. and its subsidiaries.
+© [2024] Microchip Technology Inc. and its subsidiaries.
 
     Subject to your compliance with these terms, you may use Microchip 
     software and any derivatives exclusively with Microchip products. 
@@ -54,18 +56,18 @@
 
 // FOSC
 #pragma config POSCMD = NONE    //Primary Oscillator Mode Select bits->Primary Oscillator disabled
-#pragma config OSCIOFNC = OFF    //OSC2 Pin Function bit->OSC2 is clock output
+#pragma config OSCIOFNC = ON    //OSC2 Pin Function bit->OSC2 is general purpose digital I/O pin
 #pragma config FCKSM = CSDCMD    //Clock Switching Mode bits->Both Clock switching and Fail-safe Clock Monitor are disabled
 #pragma config PLLKEN = ON    //PLL Lock Status Control->PLL lock signal will be used to disable PLL clock output if lock is lost
 #pragma config XTCFG = G3    //XT Config->24-32 MHz crystals
 #pragma config XTBST = ENABLE    //XT Boost->Boost the kick-start
 
 // FWDT
-#pragma config RWDTPS = PS1048576    //Run Mode Watchdog Timer Post Scaler select bits->1:1048576
+#pragma config RWDTPS = PS2147483648    //Run Mode Watchdog Timer Post Scaler select bits->1:2147483648
 #pragma config RCLKSEL = LPRC    //Watchdog Timer Clock Select bits->Always use LPRC
 #pragma config WINDIS = ON    //Watchdog Timer Window Enable bit->Watchdog Timer in Non-Window mode
 #pragma config WDTWIN = WIN25    //Watchdog Timer Window Select bits->WDT Window is 25% of WDT period
-#pragma config SWDTPS = PS1048576    //Sleep Mode Watchdog Timer Post Scaler select bits->1:1048576
+#pragma config SWDTPS = PS2147483648    //Sleep Mode Watchdog Timer Post Scaler select bits->1:2147483648
 #pragma config FWDTEN = ON_SW    //Watchdog Timer Enable bit->WDT controlled via SW, use WDTCON.ON bit
 
 // FPOR

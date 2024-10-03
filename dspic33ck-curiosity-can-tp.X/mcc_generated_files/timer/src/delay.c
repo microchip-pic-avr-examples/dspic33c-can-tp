@@ -1,15 +1,13 @@
 /**
- * MAIN Generated Driver Header File
+ * DELAY Generated Driver File
  * 
- * @file      system.c
- *            
- * @ingroup   systemdriver
- *            
- * @brief     This is the generated driver header file for the System driver
- *            
- * @version   Driver Version 1.0.1
- *            
- * @skipline  Device : dsPIC33CK256MP508
+ * @file delay.c
+ * 
+ * @ingroup delay
+ * 
+ * @brief This file contains functions to generate delays in the range of milliseconds and microseconds, using timer ticks to indicate delay length.
+ *
+ * @version DELAY Driver Version 1.1.0
 */
 /*
 © [2024] Microchip Technology Inc. and its subsidiaries.
@@ -32,27 +30,29 @@
     THIS SOFTWARE.
 */
 
-#include "../system.h"
-#include "../system_types.h"
-#include "../clock.h"
-#include "../pins.h"
-#include "../../can/can1.h"
-#include "../dmt.h"
-#include "../../timer/tmr1.h"
-#include "../interrupt.h"
+#ifndef FCY
+#define FCY CLOCK_InstructionFrequencyGet()
+#endif
 
+#include "../../system/clock.h"
+#include <libpic30.h>
+#include <stdint.h>
 
-void SYSTEM_Initialize(void)
-{
-    CLOCK_Initialize();
-    PINS_Initialize();
-    CAN1_Initialize();
-    DMT_Initialize();
-    TMR1_Initialize();
-    INTERRUPT_GlobalEnable();
-    INTERRUPT_Initialize();
+void DELAY_milliseconds(uint16_t milliseconds) {
+    while(milliseconds--){ 
+        __delay_ms(1); 
+    }
 }
 
-/**
- End of File
-*/
+void DELAY_microseconds(uint16_t microseconds) {
+    while( microseconds >= 32)
+    {
+        __delay_us(32);
+        microseconds -= 32;
+    }
+    
+    while(microseconds--)
+    {
+        __delay_us(1);
+    }
+}

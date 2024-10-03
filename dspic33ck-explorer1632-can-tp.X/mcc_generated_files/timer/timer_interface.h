@@ -8,13 +8,13 @@
  * @brief     Timer Driver is a 16-bit timer or 32-bit timer that can operate as a 
  *            free-running interval timer using dsPIC MCUs.
  *
- * @version   Driver Version 1.4.0
+ * @skipline @version   Firmware Driver Version 1.6.1
  *
  * @skipline  Device : dsPIC33CK256MP508
 */
 
 /*
-© [2023] Microchip Technology Inc. and its subsidiaries.
+© [2024] Microchip Technology Inc. and its subsidiaries.
 
     Subject to your compliance with these terms, you may use Microchip 
     software and any derivatives exclusively with Microchip products. 
@@ -40,9 +40,17 @@
 // Section: Included Files
 #include <stddef.h>
 #include <stdint.h>
+#include <stdbool.h>
 #include "../system/interrupt_types.h"
 
 // Section: Data Type Definitions
+
+/** 
+ * @ingroup  timerdriver
+ * @brief    Defines the deprecated SCCPx_Timer_PeriodCountSet or TMRx_PeriodCountSet API. 
+ *           Set it to true for backward compatibility. 
+*/
+#define TIMER_PERIODCOUNTSET_API_SUPPORT false
 
 /**
  @ingroup  timerdriver
@@ -63,9 +71,11 @@ struct TIMER_INTERFACE
     void (*Stop)(void);
     ///< Pointer to MCCPx_Timer_Stop or SCCPx_Timer_Stop or TMRx_Stop e.g. \ref SCCP1_Timer_Stop or \ref TMR1_Stop
     
+    #if TIMER_PERIODCOUNTSET_API_SUPPORT
     void (*PeriodCountSet)(size_t count);
     ///< Pointer to MCCPx_Timer_PeriodCountSet or SCCPx_Timer_PeriodCountSet or TMRx_PeriodCountSet e.g. \ref SCCP1_Timer_PeriodCountSet or \ref TMR1_PeriodCountSet
-
+    #endif
+    
     void (*PeriodSet)(uint32_t count);
     ///< Pointer to MCCPx_Timer_PeriodSet or SCCPx_Timer_PeriodSet or TMRx_PeriodSet e.g. \ref SCCP1_Timer_PeriodSet or \ref TMR1_PeriodSet
 	

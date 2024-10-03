@@ -7,13 +7,15 @@
  * 
  * @brief     This is the generated driver header file for the TMR1 driver
  *
- * @version   Driver Version 1.4.0
+ * @skipline @version   Firmware Driver Version 1.6.1
+ *
+ * @skipline @version   PLIB Version 1.5.4
  *
  * @skipline  Device : dsPIC33CK256MP508
 */
 
 /*
-© [2023] Microchip Technology Inc. and its subsidiaries.
+© [2024] Microchip Technology Inc. and its subsidiaries.
 
     Subject to your compliance with these terms, you may use Microchip 
     software and any derivatives exclusively with Microchip products. 
@@ -53,68 +55,73 @@
  *           This allows defining a structure with application specific name using 
  *           the 'Custom Name' field. Application specific name allows the API Portability.
 */
-extern const struct TIMER_INTERFACE Timer1;
+extern const struct TIMER_INTERFACE CAN_TP_TIMER;
 
 /**
  * @ingroup  timerdriver
  * @brief    This macro defines the Custom Name for \ref TMR1_Initialize API
  */
-#define Timer1_Initialize TMR1_Initialize
+#define CAN_TP_TIMER_Initialize TMR1_Initialize
 /**
  * @ingroup  timerdriver
  * @brief    This macro defines the Custom Name for \ref TMR1_Deinitialize API
  */
-#define Timer1_Deinitialize TMR1_Deinitialize
+#define CAN_TP_TIMER_Deinitialize TMR1_Deinitialize
 /**
  * @ingroup  timerdriver
  * @brief    This macro defines the Custom Name for \ref TMR1_Start API
  */
-#define Timer1_Start TMR1_Start
+#define CAN_TP_TIMER_Start TMR1_Start
 /**
  * @ingroup  timerdriver
  * @brief    This macro defines the Custom Name for \ref TMR1_Stop API
  */
-#define Timer1_Stop TMR1_Stop
+#define CAN_TP_TIMER_Stop TMR1_Stop
+
+#if TIMER_PERIODCOUNTSET_API_SUPPORT
 /**
  * @ingroup  timerdriver
  * @brief    This macro defines the Custom Name for \ref TMR1_PeriodCountSet API
  */
-#define Timer1_PeriodCountSet TMR1_PeriodCountSet
+#define CAN_TP_TIMER_PeriodCountSet TMR1_PeriodCountSet
+#endif
+
 /**
  * @ingroup  timerdriver
  * @brief    This macro defines the Custom Name for \ref TMR1_PeriodSet API
  */
-#define Timer1_PeriodSet TMR1_PeriodSet
+#define CAN_TP_TIMER_PeriodSet TMR1_PeriodSet
 /**
  * @ingroup  timerdriver
  * @brief    This macro defines the Custom Name for \ref TMR1_PeriodGet API
  */
-#define Timer1_PeriodGet TMR1_PeriodGet
+#define CAN_TP_TIMER_PeriodGet TMR1_PeriodGet
 /**
  * @ingroup  timerdriver
  * @brief    This macro defines the Custom Name for \ref TMR1_CounterGet API
  */
-#define Timer1_CounterGet TMR1_CounterGet
+#define CAN_TP_TIMER_CounterGet TMR1_CounterGet
 /**
  * @ingroup  timerdriver
  * @brief    This macro defines the Custom Name for \ref TMR1_Counter16BitGet API
  */
-#define Timer1_Counter16BitGet TMR1_Counter16BitGet
+#define CAN_TP_TIMER_Counter16BitGet TMR1_Counter16BitGet
 /**
  * @ingroup  timerdriver
  * @brief    This macro defines the Custom Name for \ref TMR1_InterruptPrioritySet API
  */
-#define Timer1_InterruptPrioritySet TMR1_InterruptPrioritySet
+#define CAN_TP_TIMER_InterruptPrioritySet TMR1_InterruptPrioritySet
 /**
  * @ingroup  timerdriver
  * @brief    This macro defines the Custom Name for \ref TMR1_TimeoutCallbackRegister API
  */
-#define Timer1_TimeoutCallbackRegister TMR1_TimeoutCallbackRegister
+#define CAN_TP_TIMER_TimeoutCallbackRegister TMR1_TimeoutCallbackRegister
 
 // Section: TMR1 Module APIs
 /**
  * @ingroup  timerdriver
  * @brief    Initializes the TMR1 module
+ * @param    none
  * @return   none
  */
 void TMR1_Initialize ( void );
@@ -122,6 +129,7 @@ void TMR1_Initialize ( void );
 /**
  * @ingroup  timerdriver
  * @brief    Deinitializes the TMR1 to POR values
+ * @param    none
  * @return   none
  */
 void TMR1_Deinitialize(void);
@@ -131,6 +139,7 @@ void TMR1_Deinitialize(void);
  * @ingroup  timerdriver
  * @brief    Starts the timer
  * @pre      \ref TMR1_Initialize must be called
+ * @param    none
  * @return   none
  */
 void TMR1_Start( void );
@@ -139,6 +148,7 @@ void TMR1_Start( void );
  * @ingroup  timerdriver
  * @brief    Stops the timer
  * @pre      \ref TMR1_Initialize must be called
+ * @param    none
  * @return   none
  */
 void TMR1_Stop( void );
@@ -154,6 +164,7 @@ void TMR1_PeriodSet( uint32_t count );
 /**
  * @ingroup    timerdriver
  * @brief      This inline function gets the TMR1 period count value
+ * @param      none
  * @return     Number of clock counts
  */
 inline static uint32_t TMR1_PeriodGet( void )
@@ -164,6 +175,7 @@ inline static uint32_t TMR1_PeriodGet( void )
 /**
  * @ingroup    timerdriver
  * @brief      This inline function gets the TMR1 elapsed time value
+ * @param      none
  * @return     Elapsed count value of the timer
  */
 inline static uint32_t TMR1_CounterGet( void )
@@ -174,6 +186,7 @@ inline static uint32_t TMR1_CounterGet( void )
 /**
  * @ingroup    timerdriver
  * @brief      This inline function gets the 16 bit TMR1 elapsed time value
+ * @param      none
  * @return     16 bit elapsed count value of the timer
  */
 inline static uint16_t TMR1_Counter16BitGet( void )
@@ -203,11 +216,13 @@ void TMR1_TimeoutCallbackRegister(void (*handler)(void));
  * @brief    This is the default callback with weak attribute. The user can 
  *           override and implement the default callback without weak attribute 
  *           or can register a custom callback function using  \ref TMR1_TimeoutCallbackRegister.
+ * @param    none
  * @return   none  
  */
 void TMR1_TimeoutCallback(void);
 
 
+#if TIMER_PERIODCOUNTSET_API_SUPPORT
 /**
  * @ingroup    timerdriver
  * @brief      Sets the TMR1 period count value
@@ -215,6 +230,7 @@ void TMR1_TimeoutCallback(void);
  * @return     none
  */
 void TMR1_PeriodCountSet(size_t count) __attribute__((deprecated ("\nThis will be removed in future MCC releases. \nUse TMR1_PeriodSet instead. ")));
+#endif
 
 #endif //TMR1_H
 

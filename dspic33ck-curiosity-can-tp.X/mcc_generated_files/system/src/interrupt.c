@@ -7,13 +7,15 @@
  *            
  * @brief     This is the generated driver source file for INTERRUPT driver
  *            
- * @version   Driver Version 1.1.0
+ * @skipline @version   Firmware Driver Version 1.1.2
+ *
+ * @skipline @version   PLIB Version 1.3.1
  *            
  * @skipline  Device : dsPIC33CK256MP508
 */
 
 /*
-© [2023] Microchip Technology Inc. and its subsidiaries.
+© [2024] Microchip Technology Inc. and its subsidiaries.
 
     Subject to your compliance with these terms, you may use Microchip 
     software and any derivatives exclusively with Microchip products. 
@@ -41,19 +43,19 @@
 
 void INTERRUPT_Initialize(void)
 {
-    // DMT: Dead Man Timer
-    // Priority: 1
-    IPC11bits.DMTIP = 1;
-    
     // T1: Timer 1
     // Priority: 1
     IPC0bits.T1IP = 1;
+    
+    // DMT: Dead Man Timer
+    // Priority: 1
+    IPC11bits.DMTIP = 1;
     
 }
 
 void INTERRUPT_Deinitialize(void)
 {
     //POR default value of priority
-    IPC11bits.DMTIP = 4;
     IPC0bits.T1IP = 4;
+    IPC11bits.DMTIP = 4;
 }

@@ -7,30 +7,29 @@
  *            
  * @brief     This is the generated driver source file for CAN-TP.
  *            
- * @version   Driver Version 1.0.0
+ * @version   Driver Version 1.1.0
 */
 
 /*
-    (c) 2022 Microchip Technology Inc. and its subsidiaries. You may use this
-    software and any derivatives exclusively with Microchip products.
+© [2024] Microchip Technology Inc. and its subsidiaries.
 
-    THIS SOFTWARE IS SUPPLIED BY MICROCHIP "AS IS". NO WARRANTIES, WHETHER
-    EXPRESS, IMPLIED OR STATUTORY, APPLY TO THIS SOFTWARE, INCLUDING ANY IMPLIED
-    WARRANTIES OF NON-INFRINGEMENT, MERCHANTABILITY, AND FITNESS FOR A
-    PARTICULAR PURPOSE, OR ITS INTERACTION WITH MICROCHIP PRODUCTS, COMBINATION
-    WITH ANY OTHER PRODUCTS, OR USE IN ANY APPLICATION.
-
-    IN NO EVENT WILL MICROCHIP BE LIABLE FOR ANY INDIRECT, SPECIAL, PUNITIVE,
-    INCIDENTAL OR CONSEQUENTIAL LOSS, DAMAGE, COST OR EXPENSE OF ANY KIND
-    WHATSOEVER RELATED TO THE SOFTWARE, HOWEVER CAUSED, EVEN IF MICROCHIP HAS
-    BEEN ADVISED OF THE POSSIBILITY OR THE DAMAGES ARE FORESEEABLE. TO THE
-    FULLEST EXTENT ALLOWED BY LAW, MICROCHIP'S TOTAL LIABILITY ON ALL CLAIMS IN
-    ANY WAY RELATED TO THIS SOFTWARE WILL NOT EXCEED THE AMOUNT OF FEES, IF ANY,
-    THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
-
-    MICROCHIP PROVIDES THIS SOFTWARE CONDITIONALLY UPON YOUR ACCEPTANCE OF THESE
-    TERMS.
- */
+    Subject to your compliance with these terms, you may use Microchip 
+    software and any derivatives exclusively with Microchip products. 
+    You are responsible for complying with 3rd party license terms  
+    applicable to your use of 3rd party software (including open source  
+    software) that may accompany Microchip software. SOFTWARE IS ?AS IS.? 
+    NO WARRANTIES, WHETHER EXPRESS, IMPLIED OR STATUTORY, APPLY TO THIS 
+    SOFTWARE, INCLUDING ANY IMPLIED WARRANTIES OF NON-INFRINGEMENT,  
+    MERCHANTABILITY, OR FITNESS FOR A PARTICULAR PURPOSE. IN NO EVENT 
+    WILL MICROCHIP BE LIABLE FOR ANY INDIRECT, SPECIAL, PUNITIVE, 
+    INCIDENTAL OR CONSEQUENTIAL LOSS, DAMAGE, COST OR EXPENSE OF ANY 
+    KIND WHATSOEVER RELATED TO THE SOFTWARE, HOWEVER CAUSED, EVEN IF 
+    MICROCHIP HAS BEEN ADVISED OF THE POSSIBILITY OR THE DAMAGES ARE 
+    FORESEEABLE. TO THE FULLEST EXTENT ALLOWED BY LAW, MICROCHIP?S 
+    TOTAL LIABILITY ON ALL CLAIMS RELATED TO THE SOFTWARE WILL NOT 
+    EXCEED AMOUNT OF FEES, IF ANY, YOU PAID DIRECTLY TO MICROCHIP FOR 
+    THIS SOFTWARE.
+*/
 
 #include <stdbool.h>
 #include <stdint.h>
@@ -87,6 +86,10 @@
 
 #ifdef CAN_TP_ADDRESSING_MODE_EXTENDED
 #error "Extended addressing mode not currently supported."
+#endif
+
+#ifndef CAN_TP_DEFAULT_SEPERATION_TIME_MS
+#define CAN_TP_DEFAULT_SEPERATION_TIME_MS 0
 #endif
 
 #if (CAN_TP_DEFAULT_SEPERATION_TIME_MS > 127)
@@ -207,8 +210,6 @@ static struct OUTGOING_MESSAGE outgoingMessage;
 #define CAN_TP_INCOMING_MESSAGE_BUFFER_SIZE 512
 #endif
 
-static uint8_t rxMessageBuffer[CAN_TP_INCOMING_MESSAGE_BUFFER_SIZE];
-
 static uint8_t rxFrameData[MAXIMUM_CAN_DATA_LENGTH];
 static uint8_t rxFrameLength = 0;
 
@@ -241,6 +242,8 @@ static void FlowControlStatusUpdate(uint8_t status)
 
 void CAN_TP_Initialize(void)
 {
+    static uint8_t rxMessageBuffer[CAN_TP_INCOMING_MESSAGE_BUFFER_SIZE];
+    
     incomingMessage.dataReceived = 0;
     incomingMessage.totalLength = 0;
 
@@ -313,6 +316,10 @@ void CAN_TP_RxResume(void)
 void CAN_TP_RxPause(void)
 {
     incomingMessage.paused = true;
+}
+
+bool CAN_TP_IsRxPaused(void){
+    return incomingMessage.paused;
 }
 
 bool CAN_TP_MaxFrameLengthSet(uint8_t newMax)
@@ -389,7 +396,7 @@ bool CAN_TP_MessageGet(uint8_t *buffer)
     {
         if (buffer != NULL)
         {
-            memcpy(buffer, incomingMessage.buffer, incomingMessage.totalLength);
+            (void*)memcpy(buffer, incomingMessage.buffer, incomingMessage.totalLength);
         }
 
         incomingMessage.state = INCOMING_MESSAGE_STATE_IDLE;
@@ -425,7 +432,7 @@ static void OutgoingMessageComplete(enum CAN_TP_RESULT result)
     outgoingMessage.state = OUTGOING_MESSAGE_STATE_IDLE;
 }
 
-static void TransmitPendingFlowControl()
+static void TransmitPendingFlowControl(void)
 {
     if (incomingMessage.flowControl.updateRequired == true)
     {
@@ -461,14 +468,14 @@ static void TransmitPendingFlowControl()
     }
 }
 
-static inline enum MESSAGE_TYPE GetFrameType()
+static inline enum MESSAGE_TYPE GetFrameType(void)
 {
     return (rxFrameData[0] >> 4);
 }
 
 static void CopyRxFrameDataIntoMessageBuffer(void)
 {
-    memcpy(&incomingMessage.buffer[incomingMessage.dataReceived], frame.data, frame.dataLength);
+    (void*)memcpy(&incomingMessage.buffer[incomingMessage.dataReceived], frame.data, frame.dataLength);
     incomingMessage.dataReceived += frame.dataLength;
 }
 
@@ -520,7 +527,7 @@ static void SingleFrameParse(void)
     }
 }
 
-static void SingleFrameProcess()
+static void SingleFrameProcess(void)
 {
     SingleFrameParse();
 
@@ -594,7 +601,7 @@ static void FirstFrameParse(void)
     }
 }
 
-static void FirstFrameProcess()
+static void FirstFrameProcess(void)
 {
     struct CAN_TP_EVENT_FIRST_FRAME_INDICATION_DATA firstFrameData = {0};
 
@@ -699,7 +706,7 @@ static void ConsecutiveFrameParse(void)
     }
 }
 
-static void ConsecutiveFrameProcess()
+static void ConsecutiveFrameProcess(void)
 {
     ConsecutiveFrameParse();
 
@@ -783,7 +790,7 @@ static uint16_t SeparationTimeToTicks(uint8_t separationTime)
     return ticks;
 }
 
-static void FlowcontrolFrameProcess()
+static void FlowcontrolFrameProcess(void)
 {
     uint8_t status = (rxFrameData[0] & 0x0Fu);
 
@@ -952,7 +959,7 @@ static uint8_t AdjustFrameSize(uint8_t frameDataLength)
     return newFrameLength;
 }
 
-static void SendSingleFrame()
+static void SendSingleFrame(void)
 {
     /* Format the first frame with the correct length - table 9 section 9.6.1
      * of ISO 15765-2:2016 */
@@ -963,13 +970,13 @@ static void SendSingleFrame()
     
     if (outgoingMessage.dataRemaining <= 7u)
     {
-        memcpy(&txFrameData[1], outgoingMessage.buffer, outgoingMessage.dataRemaining);
+        (void*)memcpy(&txFrameData[1], outgoingMessage.buffer, outgoingMessage.dataRemaining);
         txFrameData[0] = (MESSAGE_TYPE_SINGLE_VALUE << 4) | (uint8_t) outgoingMessage.dataRemaining;
         txFrameLength = outgoingMessage.dataRemaining + 1u;
     }
     else
     {
-        memcpy(&txFrameData[2], outgoingMessage.buffer, outgoingMessage.dataRemaining);
+        (void*)memcpy(&txFrameData[2], outgoingMessage.buffer, outgoingMessage.dataRemaining);
         txFrameData[0] = (MESSAGE_TYPE_SINGLE_VALUE << 4) | 0u;
         txFrameData[1] = (uint8_t) outgoingMessage.dataRemaining;
         txFrameLength = AdjustFrameSize(outgoingMessage.dataRemaining + 2u);
@@ -980,7 +987,7 @@ static void SendSingleFrame()
     TransmitTxFrame();
 }
 
-static void SendFirstFrame()
+static void SendFirstFrame(void)
 {
     /* Format the first frame with the correct length - table 9 section 9.6.1
      * of ISO 15765-2:2016 */
@@ -990,7 +997,7 @@ static void SendFirstFrame()
 
         txFrameData[0] = (MESSAGE_TYPE_FIRST_VALUE << 4) | (outgoingMessage.dataRemaining >> 8);
         txFrameData[1] = (uint8_t) (outgoingMessage.dataRemaining & 0xFFu);
-        memcpy(&txFrameData[2], outgoingMessage.buffer, outgoingMessage.dataLastFrame);
+        (void*)memcpy(&txFrameData[2], outgoingMessage.buffer, outgoingMessage.dataLastFrame);
     }
     else
     {
@@ -1002,7 +1009,7 @@ static void SendFirstFrame()
         txFrameData[3] = (uint8_t) ((uint32_t)outgoingMessage.dataRemaining >> 16);
         txFrameData[4] = (uint8_t) (outgoingMessage.dataRemaining >> 8);
         txFrameData[5] = (uint8_t) (outgoingMessage.dataRemaining >> 0);
-        memcpy(&txFrameData[6], outgoingMessage.buffer, outgoingMessage.dataLastFrame);
+        (void*)memcpy(&txFrameData[6], outgoingMessage.buffer, outgoingMessage.dataLastFrame);
     }
 
     txFrameLength = canMaximumFrameLength;
@@ -1029,7 +1036,7 @@ static void SendConsecutiveFrame(void)
 
         txFrameLength = AdjustFrameSize(outgoingMessage.dataLastFrame + 1u);
         txFrameData[0] = (MESSAGE_TYPE_CONSECUTIVE_VALUE << 4) | outgoingMessage.nextSequenceNumber;
-        memcpy(&txFrameData[1], &outgoingMessage.buffer[outgoingMessage.dataSent], outgoingMessage.dataLastFrame);
+        (void*)memcpy(&txFrameData[1], &outgoingMessage.buffer[outgoingMessage.dataSent], outgoingMessage.dataLastFrame);
 
         TransmitTxFrame();
     }

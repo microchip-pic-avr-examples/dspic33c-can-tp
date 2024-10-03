@@ -6,14 +6,16 @@
  * @ingroup   pinsdriver
  *            
  * @brief     This is the generated driver source file for PINS driver.
- *            
- * @version   Driver Version 1.0.0
- *            
+ *
+ * @skipline @version   Firmware Driver Version 1.0.2
+ *
+ * @skipline @version   PLIB Version 1.3.0
+ *
  * @skipline  Device : dsPIC33CK256MP508
 */
 
 /*
-© [2023] Microchip Technology Inc. and its subsidiaries.
+© [2024] Microchip Technology Inc. and its subsidiaries.
 
     Subject to your compliance with these terms, you may use Microchip 
     software and any derivatives exclusively with Microchip products. 
@@ -39,7 +41,7 @@
 #include "../pins.h"
 
 // Section: File specific functions
-void (*BUTTON_InterruptHandler)(void) = NULL;
+static void (*BUTTON_InterruptHandler)(void) = NULL;
 
 // Section: Driver Interface Function Definitions
 void PINS_Initialize(void)
@@ -57,7 +59,7 @@ void PINS_Initialize(void)
      * Setting the GPIO Direction SFR(s)
      ***************************************************************************/
     TRISA = 0x001F;
-    TRISB = 0xFFFD;
+    TRISB = 0xFFFF;
     TRISC = 0xFFFF;
     TRISD = 0xFFFD;
     TRISE = 0xFFBF;
@@ -92,7 +94,7 @@ void PINS_Initialize(void)
      * Setting the Analog/Digital Configuration SFR(s)
      ***************************************************************************/
     ANSELA = 0x001F;
-    ANSELB = 0x009D;
+    ANSELB = 0x009F;
     ANSELC = 0x00CF;
     ANSELD = 0x2C00;
     ANSELE = 0x000F;
@@ -145,17 +147,12 @@ void BUTTON_SetInterruptHandler(void (* InterruptHandler)(void))
     IEC0bits.CNBIE = 1; //Enable CNBI interrupt
 }
 
-void BUTTON_SetIOCInterruptHandler(void *handler)
-{ 
-    BUTTON_SetInterruptHandler(handler);
-}
-
 /* Interrupt service function for the CNBI interrupt. */
 void __attribute__ (( interrupt, no_auto_psv )) _CNBInterrupt (void)
 {
     if(CNFBbits.CNFB14 == 1)
     {
-        if(BUTTON_InterruptHandler) 
+        if(BUTTON_InterruptHandler != NULL) 
         { 
             BUTTON_InterruptHandler(); 
         }

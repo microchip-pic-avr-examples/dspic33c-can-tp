@@ -7,14 +7,16 @@
  *            
  * @brief     The Pin Driver directs the operation and function of 
  *            the selected device pins using dsPIC MCUs.
- *            
- * @version   Driver Version 1.0.0
- *            
+ *
+ * @skipline @version   Firmware Driver Version 1.0.2
+ *
+ * @skipline @version   PLIB Version 1.3.0
+ *
  * @skipline  Device : dsPIC33CK256MP508
 */
 
 /*
-© [2023] Microchip Technology Inc. and its subsidiaries.
+© [2024] Microchip Technology Inc. and its subsidiaries.
 
     Subject to your compliance with these terms, you may use Microchip 
     software and any derivatives exclusively with Microchip products. 
@@ -45,6 +47,7 @@
  * @ingroup  pinsdriver
  * @brief    Sets the RE14 GPIO Pin which has a custom name of LED to High
  * @pre      The RE14 must be set as Output Pin             
+ * @param    none
  * @return   none  
  */
 #define LED_SetHigh()          (_LATE14 = 1)
@@ -53,6 +56,7 @@
  * @ingroup  pinsdriver
  * @brief    Sets the RE14 GPIO Pin which has a custom name of LED to Low
  * @pre      The RE14 must be set as Output Pin
+ * @param    none
  * @return   none  
  */
 #define LED_SetLow()           (_LATE14 = 0)
@@ -61,6 +65,7 @@
  * @ingroup  pinsdriver
  * @brief    Toggles the RE14 GPIO Pin which has a custom name of LED
  * @pre      The RE14 must be set as Output Pin
+ * @param    none
  * @return   none  
  */
 #define LED_Toggle()           (_LATE14 ^= 1)
@@ -68,6 +73,7 @@
 /**
  * @ingroup  pinsdriver
  * @brief    Reads the value of the RE14 GPIO Pin which has a custom name of LED
+ * @param    none
  * @return   none  
  */
 #define LED_GetValue()         _RE14
@@ -75,6 +81,7 @@
 /**
  * @ingroup  pinsdriver
  * @brief    Configures the RE14 GPIO Pin which has a custom name of LED as Input
+ * @param    none
  * @return   none  
  */
 #define LED_SetDigitalInput()  (_TRISE14 = 1)
@@ -82,6 +89,7 @@
 /**
  * @ingroup  pinsdriver
  * @brief    Configures the RE14 GPIO Pin which has a custom name of LED as Output
+ * @param    none
  * @return   none  
  */
 #define LED_SetDigitalOutput() (_TRISE14 = 0)
@@ -89,6 +97,7 @@
 /**
  * @ingroup  pinsdriver
  * @brief    Initializes the PINS module
+ * @param    none
  * @return   none  
  */
 void PINS_Initialize(void);

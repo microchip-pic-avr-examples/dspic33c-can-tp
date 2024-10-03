@@ -6,14 +6,16 @@
  * @ingroup   resetdriver
  *            
  * @brief     This is the generated driver source file for RESET driver
- *            
- * @version   Driver Version 1.0.0
- *            
+ *
+ * @skipline @version   Firmware Driver Version 1.0.3
+ *
+ * @skipline @version   PLIB Version 1.1.0
+ *
  * @skipline  Device : dsPIC33CK256MP508
 */
 
 /*
-© [2023] Microchip Technology Inc. and its subsidiaries.
+© [2024] Microchip Technology Inc. and its subsidiaries.
 
     Subject to your compliance with these terms, you may use Microchip 
     software and any derivatives exclusively with Microchip products. 
@@ -193,7 +195,7 @@ void __attribute__ ((weak)) RESET_CauseHandler(void)
     }
 }
 
-void RESET_CauseClearAll()
+void RESET_CauseClearAll(void)
 { 
     RCON = 0x00; 
 }

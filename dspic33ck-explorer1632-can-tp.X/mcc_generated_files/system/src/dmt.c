@@ -7,13 +7,15 @@
  * 
  * @brief     This is the generated driver source file for DMT driver
  *
- * @version   Driver Version 1.1.1
+ * @skipline @version   Firmware Driver Version 1.2.1
+ *
+ * @skipline @version   PLIB Version 1.1.1
  *
  * @skipline  Device : dsPIC33CK256MP508
 */
 
 /*
-© [2023] Microchip Technology Inc. and its subsidiaries.
+© [2024] Microchip Technology Inc. and its subsidiaries.
 
     Subject to your compliance with these terms, you may use Microchip 
     software and any derivatives exclusively with Microchip products. 
@@ -42,7 +44,7 @@
 // Section: Private Variable Definitions
 static bool bPreCleared = false;
 uint32_t calibOffset = 0;
-void (*DMT_EventHandler)(void) = NULL;
+static void (*DMT_EventHandler)(void) = NULL;
 
 // Section: File specific functions
 
@@ -129,7 +131,7 @@ uint32_t DMT_CounterGet(void)
     return (counter | DMTCNTL);
 }
 
-void DMT_EventCallbackRegister(void* handler)
+void DMT_EventCallbackRegister(void (*handler)(void))
 {
     if(NULL != handler)
     {
